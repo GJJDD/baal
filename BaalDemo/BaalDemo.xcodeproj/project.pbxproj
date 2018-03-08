@@ -8,13 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		39519C3E205014E30036A87B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39519C3D205014E30036A87B /* AppDelegate.m */; };
-		39519C41205014E30036A87B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39519C40205014E30036A87B /* ViewController.m */; };
-		39519C44205014E30036A87B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39519C42205014E30036A87B /* Main.storyboard */; };
+		39519C41205014E30036A87B /* BaalWeexWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39519C40205014E30036A87B /* BaalWeexWebViewController.m */; };
 		39519C46205014E30036A87B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39519C45205014E30036A87B /* Assets.xcassets */; };
 		39519C49205014E30036A87B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39519C47205014E30036A87B /* LaunchScreen.storyboard */; };
 		39519C4C205014E30036A87B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 39519C4B205014E30036A87B /* main.m */; };
 		39519C56205014E30036A87B /* BaalDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39519C55205014E30036A87B /* BaalDemoTests.m */; };
 		39519C61205014E30036A87B /* BaalDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39519C60205014E30036A87B /* BaalDemoUITests.m */; };
+		39519CAD205121790036A87B /* WeakScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39519CA3205121780036A87B /* WeakScriptMessageDelegate.m */; };
+		39519CAE205121790036A87B /* WKWebView+BaalJavaScriptAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 39519CA4205121780036A87B /* WKWebView+BaalJavaScriptAlert.m */; };
+		39519CAF205121790036A87B /* WKWebView+Baal.m in Sources */ = {isa = PBXBuildFile; fileRef = 39519CA7205121780036A87B /* WKWebView+Baal.m */; };
+		39519CB0205121790036A87B /* WKWebView+Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 39519CA8205121780036A87B /* WKWebView+Post.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,9 +41,8 @@
 		39519C39205014E30036A87B /* BaalDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaalDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39519C3C205014E30036A87B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		39519C3D205014E30036A87B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		39519C3F205014E30036A87B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		39519C40205014E30036A87B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		39519C43205014E30036A87B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		39519C3F205014E30036A87B /* BaalWeexWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaalWeexWebViewController.h; sourceTree = "<group>"; };
+		39519C40205014E30036A87B /* BaalWeexWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaalWeexWebViewController.m; sourceTree = "<group>"; };
 		39519C45205014E30036A87B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39519C48205014E30036A87B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39519C4A205014E30036A87B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +53,16 @@
 		39519C5C205014E30036A87B /* BaalDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaalDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39519C60205014E30036A87B /* BaalDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaalDemoUITests.m; sourceTree = "<group>"; };
 		39519C62205014E30036A87B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39519CA3205121780036A87B /* WeakScriptMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeakScriptMessageDelegate.m; sourceTree = "<group>"; };
+		39519CA4205121780036A87B /* WKWebView+BaalJavaScriptAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+BaalJavaScriptAlert.m"; sourceTree = "<group>"; };
+		39519CA5205121780036A87B /* Baal_WebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baal_WebView.h; sourceTree = "<group>"; };
+		39519CA6205121780036A87B /* WKWebView+Baal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+Baal.h"; sourceTree = "<group>"; };
+		39519CA7205121780036A87B /* WKWebView+Baal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+Baal.m"; sourceTree = "<group>"; };
+		39519CA8205121780036A87B /* WKWebView+Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+Post.m"; sourceTree = "<group>"; };
+		39519CA9205121780036A87B /* WKWebView+Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+Post.h"; sourceTree = "<group>"; };
+		39519CAA205121780036A87B /* WeakScriptMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeakScriptMessageDelegate.h; sourceTree = "<group>"; };
+		39519CAB205121790036A87B /* WKWebView+BaalJavaScriptAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+BaalJavaScriptAlert.h"; sourceTree = "<group>"; };
+		39519CAC205121790036A87B /* Baal_ConfigurationDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baal_ConfigurationDefine.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +113,11 @@
 		39519C3B205014E30036A87B /* BaalDemo */ = {
 			isa = PBXGroup;
 			children = (
+				39519C94205114920036A87B /* baal */,
 				39519C3C205014E30036A87B /* AppDelegate.h */,
 				39519C3D205014E30036A87B /* AppDelegate.m */,
-				39519C3F205014E30036A87B /* ViewController.h */,
-				39519C40205014E30036A87B /* ViewController.m */,
-				39519C42205014E30036A87B /* Main.storyboard */,
+				39519C3F205014E30036A87B /* BaalWeexWebViewController.h */,
+				39519C40205014E30036A87B /* BaalWeexWebViewController.m */,
 				39519C45205014E30036A87B /* Assets.xcassets */,
 				39519C47205014E30036A87B /* LaunchScreen.storyboard */,
 				39519C4A205014E30036A87B /* Info.plist */,
@@ -130,6 +142,23 @@
 				39519C62205014E30036A87B /* Info.plist */,
 			);
 			path = BaalDemoUITests;
+			sourceTree = "<group>";
+		};
+		39519C94205114920036A87B /* baal */ = {
+			isa = PBXGroup;
+			children = (
+				39519CAC205121790036A87B /* Baal_ConfigurationDefine.h */,
+				39519CA5205121780036A87B /* Baal_WebView.h */,
+				39519CAA205121780036A87B /* WeakScriptMessageDelegate.h */,
+				39519CA3205121780036A87B /* WeakScriptMessageDelegate.m */,
+				39519CAB205121790036A87B /* WKWebView+BaalJavaScriptAlert.h */,
+				39519CA4205121780036A87B /* WKWebView+BaalJavaScriptAlert.m */,
+				39519CA6205121780036A87B /* WKWebView+Baal.h */,
+				39519CA7205121780036A87B /* WKWebView+Baal.m */,
+				39519CA9205121780036A87B /* WKWebView+Post.h */,
+				39519CA8205121780036A87B /* WKWebView+Post.m */,
+			);
+			path = baal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,7 +269,6 @@
 			files = (
 				39519C49205014E30036A87B /* LaunchScreen.storyboard in Resources */,
 				39519C46205014E30036A87B /* Assets.xcassets in Resources */,
-				39519C44205014E30036A87B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,9 +293,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39519C41205014E30036A87B /* ViewController.m in Sources */,
+				39519CB0205121790036A87B /* WKWebView+Post.m in Sources */,
+				39519C41205014E30036A87B /* BaalWeexWebViewController.m in Sources */,
+				39519CAF205121790036A87B /* WKWebView+Baal.m in Sources */,
+				39519CAE205121790036A87B /* WKWebView+BaalJavaScriptAlert.m in Sources */,
 				39519C4C205014E30036A87B /* main.m in Sources */,
 				39519C3E205014E30036A87B /* AppDelegate.m in Sources */,
+				39519CAD205121790036A87B /* WeakScriptMessageDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,14 +335,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		39519C42205014E30036A87B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				39519C43205014E30036A87B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		39519C47205014E30036A87B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -433,6 +457,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TKWR8NFZW9;
 				INFOPLIST_FILE = BaalDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dianwoda.BaalDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -447,6 +472,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TKWR8NFZW9;
 				INFOPLIST_FILE = BaalDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dianwoda.BaalDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

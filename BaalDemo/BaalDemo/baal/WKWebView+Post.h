@@ -1,15 +1,13 @@
 //
-//  ViewController.h
-//  BaalDemo
+//  WKWebView+Post.h
+//  Baal
 //
 //  Created by dianwoda on 2018/3/7.
 //  Copyright © 2018年 dianwoda. All rights reserved.
 //
+#import <WebKit/WebKit.h>
 
-#import <UIKit/UIKit.h>
-
-@interface ViewController : UIViewController
-
+@interface WKWebView (Post)
 
 @end
 
