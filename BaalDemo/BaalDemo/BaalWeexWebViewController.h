@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Baal_WebView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BaalWeexWebViewController : UIViewController
@@ -64,7 +64,10 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param javaScriptString js 字符串
  */
 - (void)ba_web_stringByEvaluateJavaScript:(NSString *)javaScriptString completionHandler:(void (^ _Nullable)(_Nullable id, NSError * _Nullable error))completionHandler;
-
+/**
+ * @param messageNameScripts 注册的消息名称以及对应需要执行的block
+ */
+- (void)ba_scriptMessageHandler:(NSDictionary<NSString *,Baal_webView_userContentControllerDidReceiveScriptMessageBlock> *)messageNameScripts;
 @end
 NS_ASSUME_NONNULL_END
 

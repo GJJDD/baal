@@ -7,7 +7,7 @@
 //
 
 #import "BaalWeexWebViewController.h"
-#import "Baal_WebView.h"
+
 
 
 @interface BaalWeexWebViewController ()
@@ -217,7 +217,7 @@
 }
 
 #pragma mark 导航栏的右侧按钮
-- (void)configMenuItem:(NSString *)rightImageName
+- (void)configRightItem:(NSString *)rightImageName
 {
     // navigationbar_more
     UIImage *rightImage = [UIImage imageNamed:rightImageName];
@@ -358,6 +358,20 @@
 - (BOOL)willDealloc
 {
     return NO;
+}
+
+
+// name:block,name1:block1
+- (void)ba_scriptMessageHandler:(NSDictionary<NSString *,Baal_webView_userContentControllerDidReceiveScriptMessageBlock> *)messageNameScripts
+{
+    
+    [self.webView ba_web_addScriptMessageHandlerWithNameArray:[messageNameScripts allKeys]];
+    self.webView.ba_web_userContentControllerDidReceiveScriptMessageBlock = ^(WKUserContentController * _Nonnull userContentController, WKScriptMessage * _Nonnull message) {
+        Baal_webView_userContentControllerDidReceiveScriptMessageBlock receiveScriptMessageBlock = [messageNameScripts valueForKey:message.name];
+        if (receiveScriptMessageBlock) {
+            receiveScriptMessageBlock(userContentController,message);
+        }
+    };
 }
 
 @end

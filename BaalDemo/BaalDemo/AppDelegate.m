@@ -26,8 +26,6 @@
     [vc ba_web_loadURL:[NSURL URLWithString:@"http://m.baidu.com"]];
 
     UINavigationController *rootViewController = [[UINavigationController alloc] initWithRootViewController:vc];
-    vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[UIButton buttonWithType:(UIButtonTypeContactAdd)]];
-    rootViewController.navigationBar.hidden = NO;
     self.window.rootViewController = rootViewController;
     [self.window makeKeyAndVisible];
     
