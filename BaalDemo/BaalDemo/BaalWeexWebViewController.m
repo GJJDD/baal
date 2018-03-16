@@ -33,7 +33,7 @@
 {
     self.view.backgroundColor = Baal_Color_White_pod;
     self.webView.hidden = NO;
-    
+//    [self registerNativeHelperJS];
 //    [self configBackItem];
 //    [self configMenuItem];
     
@@ -45,6 +45,8 @@
     };
     
     self.webView.ba_web_didFinishBlock = ^(WKWebView *webView, WKNavigation *navigation) {
+        Baal_StrongSelf;
+
         
     };
     
@@ -305,9 +307,9 @@
         _webConfig.userContentController = userContentController;
         
         // 初始化偏好设置属性：preferences
-        _webConfig.preferences = [WKPreferences new];
+//        _webConfig.preferences = [WKPreferences new];
         // The minimum font size in points default is 0;
-        _webConfig.preferences.minimumFontSize = 40;
+//        _webConfig.preferences.minimumFontSize = 40;
         // 是否支持 JavaScript
         _webConfig.preferences.javaScriptEnabled = YES;
         // 不通过用户交互，是否可以打开窗口
@@ -362,9 +364,35 @@
 
 
 // name:block,name1:block1
-- (void)ba_scriptMessageHandler:(NSDictionary<NSString *,Baal_webView_userContentControllerDidReceiveScriptMessageBlock> *)messageNameScripts
+- (void)ba_scriptMessageHandler:(NSMutableDictionary<NSString *,Baal_webView_userContentControllerDidReceiveScriptMessageBlock> *)messageNameScripts
 {
+    Baal_webView_userContentControllerDidReceiveScriptMessageBlock block1 = ^(WKUserContentController *userContentController, WKScriptMessage *message){
+        UIViewController *v = [[UIViewController alloc] init];
+        [self.navigationController pushViewController:v animated:YES];
+    };
     
+    Baal_webView_userContentControllerDidReceiveScriptMessageBlock block = ^(WKUserContentController *userContentController, WKScriptMessage *message){
+        NSDictionary *dict =message.body;
+        NSString *data = @"xxxx";//dict[@"params"];
+        
+        NSString *method = dict[@"onSuccess"];
+        NSString *jsmethod = [method stringByAppendingString:@"()"];
+        if ([data isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary*)data;
+            if (dic.count) {
+                jsmethod = [NSString stringWithFormat:@"%@(%@)",method,data];
+            }
+        }else if ([data isKindOfClass:[NSString class]] || [data isKindOfClass:[NSNumber class]]){
+            jsmethod = [NSString stringWithFormat:@"%@('%@')",method,data];
+        }
+        
+        [self.webView ba_web_stringByEvaluateJavaScript:jsmethod completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
+         
+        }];
+        
+    };
+    NSDictionary *d = @{@"greeting":block, @"greeting1":block1};
+    [messageNameScripts addEntriesFromDictionary:d];
     [self.webView ba_web_addScriptMessageHandlerWithNameArray:[messageNameScripts allKeys]];
     self.webView.ba_web_userContentControllerDidReceiveScriptMessageBlock = ^(WKUserContentController * _Nonnull userContentController, WKScriptMessage * _Nonnull message) {
         Baal_webView_userContentControllerDidReceiveScriptMessageBlock receiveScriptMessageBlock = [messageNameScripts valueForKey:message.name];
@@ -373,5 +401,17 @@
         }
     };
 }
+
+- (void)registerNativeHelperJS{
+    NSString *file = [[NSBundle mainBundle] pathForResource:@"nativehelper" ofType:@"js"];
+    if (file) {
+        NSString *js = [NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil];
+        [self.webView ba_web_stringByEvaluateJavaScript:js completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
+            //            NSLog(@"%@----%@", result,error);
+        }];
+    }
+}
+
+
 
 @end

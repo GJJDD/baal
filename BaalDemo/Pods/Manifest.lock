@@ -1,0 +1,22 @@
+PODS:
+  - WeexSDK (0.17.0)
+
+DEPENDENCIES:
+  - WeexSDK (from `https://github.com/apache/incubator-weex.git`, tag `0.17.0`)
+
+EXTERNAL SOURCES:
+  WeexSDK:
+    :git: https://github.com/apache/incubator-weex.git
+    :tag: 0.17.0
+
+CHECKOUT OPTIONS:
+  WeexSDK:
+    :git: https://github.com/apache/incubator-weex.git
+    :tag: 0.17.0
+
+SPEC CHECKSUMS:
+  WeexSDK: 555479fae778a9ebda85781200d02df2045b85d2
+
+PODFILE CHECKSUM: 7c277f6e3088cffc7299140c0585e46d370142fe
+
+COCOAPODS: 1.4.0

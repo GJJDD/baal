@@ -68,6 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param messageNameScripts 注册的消息名称以及对应需要执行的block
  */
 - (void)ba_scriptMessageHandler:(NSDictionary<NSString *,Baal_webView_userContentControllerDidReceiveScriptMessageBlock> *)messageNameScripts;
+- (void)registerNativeHelperJS;
 @end
 NS_ASSUME_NONNULL_END
 

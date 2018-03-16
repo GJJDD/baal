@@ -3,8 +3,7 @@ platform :ios, '7.0'
 #inhibit_all_warnings!
 
 def common
-    pod 'baal', :path=>'../../'
-    
+    pod 'WeexSDK', :git =>'https://github.com/apache/incubator-weex.git', :tag => '0.17.0'
 end
 
 target 'BaalDemo' do
