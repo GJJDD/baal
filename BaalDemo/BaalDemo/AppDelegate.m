@@ -51,11 +51,15 @@
 //
 //    [vc ba_web_loadHTMLString:js];
     
-    NSArray *modules  = @[@{@"moduleName":@"guide",@"moduleMethod":@[@"greeting",@"greeting1"]}];
-    NSString *htmlurl = @"http://192.168.103.70:8080/dist/web/views/setting/ModifyAccountView.js";
-    NSString *weexHtml = [self weexHtmlHybridModules:modules andWeexHtmlJs:htmlurl];
+    // name:block
     
-    [vc ba_web_loadHTMLString:weexHtml];
+
+    
+//    NSArray *modules  = @[@{@"moduleName":@"guide",@"moduleMethod":@[@"greeting",@"greeting1"]}];
+//    NSString *htmlurl = @"http://192.168.103.70:8080/dist/web/views/setting/ModifyAccountView.js";
+//    NSString *weexHtml = [self weexHtmlHybridModules:modules andWeexHtmlJs:htmlurl];
+    
+    [vc test1];
     UINavigationController *rootViewController = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = rootViewController;
     [self.window makeKeyAndVisible];
@@ -82,5 +86,7 @@
     NSString *weexhtml = [NSString stringWithFormat:@"<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset=\"utf-8\">\n            <title>点我达骑手</title>\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n                <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n                    <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\">\n                        <meta name=\"apple-touch-fullscreen\" content=\"yes\">\n                            <meta name=\"format-detection\" content=\"telephone=no, email=no\">\n                                <style>body::before { content: \"1\"; height: 0px; overflow: hidden; color: transparent; display: block; }body{margin:0;padding:0}</style>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/vue/vue.min.js\"></script>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/weex-vue-render/index.min.js\"></script>\n    </head>    <body>\n        <div id=\"root\"></div>\n        %@%@\n        <script src=\"%@\"></script>\n    </body>\n</html>\n",weexhtmlModule,nativeHybrid,url];
     return weexhtml;
 }
+
+
 
 @end

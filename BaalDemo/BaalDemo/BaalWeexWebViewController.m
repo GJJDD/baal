@@ -1,10 +1,11 @@
 //
-//  BAWebViewController.m
-//  BABAWebViewController
+//  BaalWeexWebViewController.m
+//  BaalDemo
 //
-//  Created by boai on 2017/6/13.
-//  Copyright © 2017年 boai. All rights reserved.
+//  Created by dianwoda on 2018/3/7.
+//  Copyright © 2018年 dianwoda. All rights reserved.
 //
+
 
 #import "BaalWeexWebViewController.h"
 
@@ -397,6 +398,54 @@
     
     NSString *weexhtml = [NSString stringWithFormat:@"<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset=\"utf-8\">\n            <title>点我达骑手</title>\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n                <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n                    <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\">\n                        <meta name=\"apple-touch-fullscreen\" content=\"yes\">\n                            <meta name=\"format-detection\" content=\"telephone=no, email=no\">\n                                <style>body::before { content: \"1\"; height: 0px; overflow: hidden; color: transparent; display: block; }body{margin:0;padding:0}</style>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/vue/vue.min.js\"></script>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/weex-vue-render/index.min.js\"></script>\n    </head>    <body>\n        <div id=\"root\"></div>\n        %@%@\n        <script src=\"%@\"></script>\n    </body>\n</html>\n",weexhtmlModule,nativeHybrid,url];
     return weexhtml;
+}
+
+- (void)ba_web_loadHtmlWithModules:(NSArray *)modules andWeexHtmlJs:(NSString *)url
+{
+    NSMutableDictionary *callHandler = [NSMutableDictionary dictionary];
+    NSMutableArray *modulesArray = [NSMutableArray array];
+    for (NSDictionary *module in modules) {
+        [callHandler addEntriesFromDictionary:module[@"moduleMethod"]];
+        NSDictionary *moduleDict = @{@"moduleName":module[@"moduleName"],@"moduleMethod":[module[@"moduleMethod"] allKeys]};
+        [modulesArray addObject:moduleDict];
+    }
+    [self ba_scriptMessageHandler:callHandler];
+    [self ba_web_loadHTMLString:[self weexHtmlHybridModules:modulesArray andWeexHtmlJs:url]];
+}
+
+
+
+
+
+- (void)test1
+{
+    Baal_webView_userContentControllerDidReceiveScriptMessageBlock block = ^(WKUserContentController *userContentController, WKScriptMessage *message){
+        NSDictionary *dict =message.body;
+        NSString *data = @"xxxx";//dict[@"params"];
+        
+        NSString *method = dict[@"onSuccess"];
+        NSString *jsmethod = [method stringByAppendingString:@"()"];
+        if ([data isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary*)data;
+            if (dic.count) {
+                jsmethod = [NSString stringWithFormat:@"%@(%@)",method,data];
+            }
+        }else if ([data isKindOfClass:[NSString class]] || [data isKindOfClass:[NSNumber class]]){
+            jsmethod = [NSString stringWithFormat:@"%@('%@')",method,data];
+        }
+        
+        [self.webView ba_web_stringByEvaluateJavaScript:jsmethod completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
+            
+        }];
+    };
+    
+    Baal_webView_userContentControllerDidReceiveScriptMessageBlock block1 = ^(WKUserContentController *userContentController, WKScriptMessage *message){
+        
+    };
+    NSString *htmlurl = @"http://192.168.103.70:8080/dist/web/views/setting/ModifyAccountView.js";
+    NSArray *modules  = @[@{@"moduleName":@"guide",@"moduleMethod":@{@"greeting":block,@"greeting1":block1}}];
+    
+    [self ba_web_loadHtmlWithModules:modules andWeexHtmlJs:htmlurl];
 }
 
 

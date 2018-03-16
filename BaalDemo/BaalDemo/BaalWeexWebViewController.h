@@ -1,10 +1,11 @@
 //
-//  BAWebViewController.h
-//  BAWebViewController
+//  BaalWeexWebViewController.h
+//  BaalDemo
 //
-//  Created by boai on 2017/6/13.
-//  Copyright © 2017年 boai. All rights reserved.
+//  Created by dianwoda on 2018/3/7.
+//  Copyright © 2018年 dianwoda. All rights reserved.
 //
+
 
 #import <UIKit/UIKit.h>
 #import "Baal_WebView.h"
@@ -65,10 +66,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)ba_web_stringByEvaluateJavaScript:(NSString *)javaScriptString completionHandler:(void (^ _Nullable)(_Nullable id, NSError * _Nullable error))completionHandler;
 /**
+ * js交互方法注册以及对应实现
  * @param messageNameScripts 注册的消息名称以及对应需要执行的block
  */
 - (void)ba_scriptMessageHandler:(NSDictionary<NSString *,Baal_webView_userContentControllerDidReceiveScriptMessageBlock> *)messageNameScripts;
-
+/*
+ * 注册扩展以及加载对应的weex-h5 url
+ * @param modules 注册的扩展给weex的模块以及对应方法
+ * @param url     webpack打包生成的url
+ */
+- (void)ba_web_loadHtmlWithModules:(NSArray *)modules andWeexHtmlJs:(NSString *)url;
+- (void)test1;
 @end
 NS_ASSUME_NONNULL_END
 
