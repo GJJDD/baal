@@ -366,33 +366,6 @@
 // name:block,name1:block1
 - (void)ba_scriptMessageHandler:(NSMutableDictionary<NSString *,Baal_webView_userContentControllerDidReceiveScriptMessageBlock> *)messageNameScripts
 {
-    Baal_webView_userContentControllerDidReceiveScriptMessageBlock block1 = ^(WKUserContentController *userContentController, WKScriptMessage *message){
-        UIViewController *v = [[UIViewController alloc] init];
-        [self.navigationController pushViewController:v animated:YES];
-    };
-    
-    Baal_webView_userContentControllerDidReceiveScriptMessageBlock block = ^(WKUserContentController *userContentController, WKScriptMessage *message){
-        NSDictionary *dict =message.body;
-        NSString *data = @"xxxx";//dict[@"params"];
-        
-        NSString *method = dict[@"onSuccess"];
-        NSString *jsmethod = [method stringByAppendingString:@"()"];
-        if ([data isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *dic = (NSDictionary*)data;
-            if (dic.count) {
-                jsmethod = [NSString stringWithFormat:@"%@(%@)",method,data];
-            }
-        }else if ([data isKindOfClass:[NSString class]] || [data isKindOfClass:[NSNumber class]]){
-            jsmethod = [NSString stringWithFormat:@"%@('%@')",method,data];
-        }
-        
-        [self.webView ba_web_stringByEvaluateJavaScript:jsmethod completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
-         
-        }];
-        
-    };
-    NSDictionary *d = @{@"greeting":block, @"greeting1":block1};
-    [messageNameScripts addEntriesFromDictionary:d];
     [self.webView ba_web_addScriptMessageHandlerWithNameArray:[messageNameScripts allKeys]];
     self.webView.ba_web_userContentControllerDidReceiveScriptMessageBlock = ^(WKUserContentController * _Nonnull userContentController, WKScriptMessage * _Nonnull message) {
         Baal_webView_userContentControllerDidReceiveScriptMessageBlock receiveScriptMessageBlock = [messageNameScripts valueForKey:message.name];
@@ -402,16 +375,59 @@
     };
 }
 
-- (void)registerNativeHelperJS{
-    NSString *file = [[NSBundle mainBundle] pathForResource:@"nativehelper" ofType:@"js"];
-    if (file) {
-        NSString *js = [NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil];
-        [self.webView ba_web_stringByEvaluateJavaScript:js completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
-            //            NSLog(@"%@----%@", result,error);
-        }];
-    }
+
+
+
+
+// 封装weex-h5 module
+- (NSString *)weexHtmlHybridModules:(NSArray *)modules andWeexHtmlJs:(NSString *)url
+{
+    NSString *nativeHybrid = @"        <script>\n            var nativeHybrid = {}\n            if (weex.config.env.platform === 'Web') {\n                window.NativeHybrid = nativeHybrid\n                if (window.Vue) {\n                    window.Vue.use(nativeHybrid)\n                }\n            }\n        </script>\n        \n    \n";
+    NSMutableString *weexhtmlModule = [NSMutableString string];
+    [modules enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSMutableString *weexhtmlMethod = [NSMutableString string];
+        for (int i = 0;i<[obj[@"moduleMethod"] count];i++) {
+            
+            [weexhtmlMethod appendFormat:@"\n                                        %@ (params, callback) {\n                                          webkit.messageHandlers.%@.postMessage(params,callback);\n                                            nativeHybrid.%@ = function(data) {\n                                                callback(data);\n                                             }\n                                       },\n",obj[@"moduleMethod"][i],obj[@"moduleMethod"][i],obj[@"moduleMethod"][i]];
+        }
+        [weexhtmlModule appendFormat:@"\n<script>\n            %@ = {\n                init: function (weex) {\n                    weex.registerModule('%@', {%@                                        })\n                }\n            }\n        weex.install(%@);\n        </script>\n",obj[@"moduleName"],obj[@"moduleName"],weexhtmlMethod,obj[@"moduleName"]];
+        weexhtmlMethod = nil;
+        
+    }];
+    
+    NSString *weexhtml = [NSString stringWithFormat:@"<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset=\"utf-8\">\n            <title>点我达骑手</title>\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n                <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n                    <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\">\n                        <meta name=\"apple-touch-fullscreen\" content=\"yes\">\n                            <meta name=\"format-detection\" content=\"telephone=no, email=no\">\n                                <style>body::before { content: \"1\"; height: 0px; overflow: hidden; color: transparent; display: block; }body{margin:0;padding:0}</style>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/vue/vue.min.js\"></script>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/weex-vue-render/index.min.js\"></script>\n    </head>    <body>\n        <div id=\"root\"></div>\n        %@%@\n        <script src=\"%@\"></script>\n    </body>\n</html>\n",weexhtmlModule,nativeHybrid,url];
+    return weexhtml;
 }
 
 
-
+//- (void)test
+//{
+//    Baal_webView_userContentControllerDidReceiveScriptMessageBlock block1 = ^(WKUserContentController *userContentController, WKScriptMessage *message){
+//        UIViewController *v = [[UIViewController alloc] init];
+//        [self.navigationController pushViewController:v animated:YES];
+//    };
+//
+//    Baal_webView_userContentControllerDidReceiveScriptMessageBlock block = ^(WKUserContentController *userContentController, WKScriptMessage *message){
+//        NSDictionary *dict =message.body;
+//        NSString *data = @"xxxx";//dict[@"params"];
+//
+//        NSString *method = dict[@"onSuccess"];
+//        NSString *jsmethod = [method stringByAppendingString:@"()"];
+//        if ([data isKindOfClass:[NSDictionary class]]) {
+//            NSDictionary *dic = (NSDictionary*)data;
+//            if (dic.count) {
+//                jsmethod = [NSString stringWithFormat:@"%@(%@)",method,data];
+//            }
+//        }else if ([data isKindOfClass:[NSString class]] || [data isKindOfClass:[NSNumber class]]){
+//            jsmethod = [NSString stringWithFormat:@"%@('%@')",method,data];
+//        }
+//
+//        [self.webView ba_web_stringByEvaluateJavaScript:jsmethod completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
+//
+//        }];
+//
+//    };
+//    NSDictionary *d = @{@"greeting":block, @"greeting1":block1};
+//    [messageNameScripts addEntriesFromDictionary:d];
+//}
 @end
