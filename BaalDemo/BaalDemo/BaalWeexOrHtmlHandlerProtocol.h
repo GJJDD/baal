@@ -11,6 +11,6 @@
 #import <WeexSDK/WeexSDK.h>
 
 @protocol BaalWeexOrHtmlHandlerProtocol <NSObject>
-- (NSArray *)ba_web_registerModules:(WKWebView *)webView andWeexParams:(NSString *)weexParamsJson andCallback:(WXModuleKeepAliveCallback)callback;
+- (NSArray *)ba_registerModules:(WKWebView *)webView andWeexParams:(NSString *)weexParamsJson andCallback:(WXModuleKeepAliveCallback)callback;
 @end
 

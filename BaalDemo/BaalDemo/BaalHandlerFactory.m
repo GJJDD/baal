@@ -50,7 +50,7 @@
                                                            error:&err];
     
     BaalWeexOrHtmlHandlerImpl<BaalWeexOrHtmlHandlerProtocol> *impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
-    NSArray *weexModule = [impl ba_web_registerModules:nil andWeexParams:params andCallback:callback];
+    NSArray *weexModule = [impl ba_registerModules:nil andWeexParams:params andCallback:callback];
     [weexModule enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         NSString *moduleName = dict[@"moduleName"];

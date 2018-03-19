@@ -11,7 +11,7 @@
 
 @implementation BaalWeexOrHtmlHandlerImpl
 
-- (NSArray *)ba_web_registerModules:(WKWebView *)webView andWeexParams:(NSString *)weexParamsJson andCallback:(WXModuleKeepAliveCallback)callback
+- (NSArray *)ba_registerModules:(WKWebView *)webView andWeexParams:(NSString *)weexParamsJson andCallback:(WXModuleKeepAliveCallback)callback
 {
     
     Baal_moduleMethodBlock block = ^(WKUserContentController *userContentController, WKScriptMessage *message){

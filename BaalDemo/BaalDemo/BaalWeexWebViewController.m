@@ -263,7 +263,13 @@
     CGRect webViewRect;
     CGRect progressViewRect = CGRectMake(0, Baal_getNavBarHeight(), Baal_SCREEN_WIDTH, 20);
     if(self.navigationController.navigationBarHidden) {
-        webViewRect = CGRectMake(0, Baal_getNavBarHeight(), Baal_SCREEN_WIDTH, Baal_SCREEN_HEIGHT-Baal_getNavBarHeight());
+        if (self.isFullScreen) {
+            progressViewRect = CGRectMake(0, 0, Baal_SCREEN_WIDTH, 20);
+            webViewRect = CGRectMake(0,0, Baal_SCREEN_WIDTH, Baal_SCREEN_HEIGHT);
+        } else {
+            webViewRect = CGRectMake(0, Baal_getNavBarHeight(), Baal_SCREEN_WIDTH, Baal_SCREEN_HEIGHT-Baal_getNavBarHeight());
+        }
+
     } else {
         webViewRect = CGRectMake(0, 0, Baal_SCREEN_WIDTH, Baal_SCREEN_HEIGHT);
     }
@@ -383,10 +389,6 @@
     };
 }
 
-
-
-
-
 // 封装weex-h5 module
 - (NSString *)weexHtmlHybridModules:(NSArray *)modules andWeexHtmlJs:(NSString *)url
 {
@@ -422,30 +424,10 @@
     [self ba_web_loadHTMLString:[self weexHtmlHybridModules:modulesArray andWeexHtmlJs:url]];
 }
 
-//- (void)ba_web_callJs:(NSString *)method andData:(NSDictionary *)data
-//{
-//    NSError *error = nil;
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:&error];
-//    NSString *paramsJson = nil;
-//    if (error) {
-//        paramsJson = @"";
-//    } else {
-//        paramsJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    }
-//    NSString *jsmethod = [method stringByAppendingString:@"()"];
-//    if ([data isKindOfClass:[NSString class]]){
-//        jsmethod = [NSString stringWithFormat:@"%@('%@')",method,data];
-//    }
-//    [self.webView ba_web_stringByEvaluateJavaScript:jsmethod completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
-//        
-//    }];
-//}
-
-
 - (void)ba_web_loadHtmlWithModulesAndUrl:(NSString *)weexHtmlJs
 {
     BaalWeexOrHtmlHandlerImpl<BaalWeexOrHtmlHandlerProtocol> *impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
-    NSArray *modules = [impl ba_web_registerModules:self.webView andWeexParams:nil andCallback:nil];
+    NSArray *modules = [impl ba_registerModules:self.webView andWeexParams:nil andCallback:nil];
     [self ba_web_loadHtmlWithModules:modules andWeexHtmlJs:weexHtmlJs];
 }
 
