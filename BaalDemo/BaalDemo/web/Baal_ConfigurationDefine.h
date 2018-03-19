@@ -344,7 +344,7 @@ CG_INLINE NSDictionary * dictionaryToJson(NSString *json){
 }
 
 
-
+#import <WebKit/WebKit.h>
 typedef void (^Baal_moduleMethodBlock)(WKUserContentController *userContentController, WKScriptMessage *message);
 
 #endif /* Baal_ConfigurationDefine_h */
