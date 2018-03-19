@@ -15,15 +15,14 @@
 {
     
     Baal_moduleMethodBlock block = ^(WKUserContentController *userContentController, WKScriptMessage *message){
-        NSError *err;
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[message?message.body:weexParamsJson dataUsingEncoding:NSUTF8StringEncoding]
-                                                             options:NSJSONReadingMutableContainers
-                                                               error:&err];
+        NSDictionary *dict = dictionaryToJson(message?message.body:weexParamsJson);
         NSDictionary *params = dict[@"params"];
         if (message) {
             /* 核心业务逻辑 */
             NSDictionary *returnData = @{@"name":@"zh"};
-            [self ba_web_callJs:dict[@"callbackJsMethod"] andData:returnData andWebView:webView];
+            [webView ba_web_stringByEvaluateJavaScript:ba_web_callJs(dict[@"callbackJsMethod"], returnData) completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
+                
+            }];
         } else {
             /* 核心业务逻辑 */
             NSDictionary *returnData = @{@"name":@"zh"};
@@ -37,23 +36,5 @@
     return modules;
 }
 
-#pragma mark - private Method
-- (void)ba_web_callJs:(NSString *)method andData:(NSDictionary *)data andWebView:(WKWebView *)webView
-{
-    NSError *error = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:&error];
-    NSString *paramsJson = nil;
-    if (error) {
-        paramsJson = @"";
-    } else {
-        paramsJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    }
-    NSString *jsmethod = [method stringByAppendingString:@"()"];
-    if ([paramsJson isKindOfClass:[NSString class]]){
-        jsmethod = [NSString stringWithFormat:@"%@(%@)",method,paramsJson];
-    }
-    [webView ba_web_stringByEvaluateJavaScript:jsmethod completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
-        
-    }];
-}
+
 @end

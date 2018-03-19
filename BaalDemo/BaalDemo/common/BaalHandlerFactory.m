@@ -43,12 +43,7 @@
 
 + (void)weexModuleParams:(NSString *)params callback:(WXModuleKeepAliveCallback)callback
 {
-    
-    NSError *err;
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[params dataUsingEncoding:NSUTF8StringEncoding]
-                                                         options:NSJSONReadingMutableContainers
-                                                           error:&err];
-    
+    NSDictionary *dict = dictionaryToJson(params);
     BaalWeexOrHtmlHandlerImpl<BaalWeexOrHtmlHandlerProtocol> *impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
     NSArray *weexModule = [impl ba_registerModules:nil andWeexParams:params andCallback:callback];
     [weexModule enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

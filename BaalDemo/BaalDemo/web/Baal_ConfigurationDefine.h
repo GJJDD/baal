@@ -314,6 +314,37 @@ CG_INLINE NSInteger Baal_getNavBarHeight() {
     }
 }
 
+
+CG_INLINE NSString * ba_web_callJs(NSString *method, NSDictionary *data)
+{
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *paramsJson = nil;
+    if (error) {
+        paramsJson = @"";
+    } else {
+        paramsJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    NSString *jsmethod = [method stringByAppendingString:@"()"];
+    if ([paramsJson isKindOfClass:[NSString class]]){
+        jsmethod = [NSString stringWithFormat:@"%@(%@)",method,paramsJson];
+    }
+    return jsmethod;
+}
+
+CG_INLINE NSDictionary * dictionaryToJson(NSString *json){
+    NSError *err;
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding]
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&err];
+    if (err) {
+        return NULL;
+    }
+    return dict;
+}
+
+
+
 typedef void (^Baal_moduleMethodBlock)(WKUserContentController *userContentController, WKScriptMessage *message);
 
 #endif /* Baal_ConfigurationDefine_h */
