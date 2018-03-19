@@ -15,24 +15,20 @@
 {
     
     Baal_moduleMethodBlock block = ^(WKUserContentController *userContentController, WKScriptMessage *message){
-        
+        NSError *err;
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[message?message.body:weexParamsJson dataUsingEncoding:NSUTF8StringEncoding]
+                                                             options:NSJSONReadingMutableContainers
+                                                               error:&err];
+        NSDictionary *params = dict[@"params"];
         if (message) {
-            
-
-            NSError *err;
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[message.body dataUsingEncoding:NSUTF8StringEncoding]
-                                                                options:NSJSONReadingMutableContainers
-                                                                  error:&err];
-            NSDictionary *params = dict[@"params"];
             /* 核心业务逻辑 */
-            NSDictionary *data = @{@"name":@"zh"};
-            [self ba_web_callJs:dict[@"method"] andData:data andWebView:webView];
+            NSDictionary *returnData = @{@"name":@"zh"};
+            [self ba_web_callJs:dict[@"callbackJsMethod"] andData:returnData andWebView:webView];
         } else {
             /* 核心业务逻辑 */
-            NSDictionary *data = @{@"name":weexParamsJson};
-            callback(data);
+            NSDictionary *returnData = @{@"name":@"zh"};
+            callback(returnData);
         }
-       
     };
     Baal_moduleMethodBlock block1 = ^(WKUserContentController *userContentController, WKScriptMessage *message){
         

@@ -372,6 +372,7 @@
         Baal_moduleMethodBlock receiveScriptMessageBlock = [messageNameScripts valueForKey:message.name];
         if (receiveScriptMessageBlock) {
             receiveScriptMessageBlock(userContentController,message);
+
         }
     };
 }
@@ -395,8 +396,10 @@
         weexhtmlMethod = nil;
         
     }];
-    
-    NSString *weexhtml = [NSString stringWithFormat:@"<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset=\"utf-8\">\n            <title>点我达骑手</title>\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n                <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n                    <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\">\n                        <meta name=\"apple-touch-fullscreen\" content=\"yes\">\n                            <meta name=\"format-detection\" content=\"telephone=no, email=no\">\n                                <style>body::before { content: \"1\"; height: 0px; overflow: hidden; color: transparent; display: block; }body{margin:0;padding:0}</style>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/vue/vue.min.js\"></script>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/weex-vue-render/index.min.js\"></script>\n    </head>    <body>\n        <div id=\"root\"></div>\n        %@%@\n        <script src=\"%@\"></script>\n    </body>\n</html>\n",weexhtmlModule,nativeHybrid,url];
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    // app名称
+    NSString *app_Name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
+    NSString *weexhtml = [NSString stringWithFormat:@"<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset=\"utf-8\">\n            <title>%@</title>\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n                <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n                    <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\">\n                        <meta name=\"apple-touch-fullscreen\" content=\"yes\">\n                            <meta name=\"format-detection\" content=\"telephone=no, email=no\">\n                                <style>body::before { content: \"1\"; height: 0px; overflow: hidden; color: transparent; display: block; }body{margin:0;padding:0}</style>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/vue/vue.min.js\"></script>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/weex-vue-render/index.min.js\"></script>\n    </head>    <body>\n        <div id=\"root\"></div>\n        %@%@\n        <script src=\"%@\"></script>\n    </body>\n</html>\n",app_Name?app_Name:@"baal",weexhtmlModule,nativeHybrid,url];
     return weexhtml;
 }
 
@@ -413,24 +416,24 @@
     [self ba_web_loadHTMLString:[self weexHtmlHybridModules:modulesArray andWeexHtmlJs:url]];
 }
 
-- (void)ba_web_callJs:(NSString *)method andData:(NSDictionary *)data
-{
-    NSError *error = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:&error];
-    NSString *paramsJson = nil;
-    if (error) {
-        paramsJson = @"";
-    } else {
-        paramsJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    }
-    NSString *jsmethod = [method stringByAppendingString:@"()"];
-    if ([data isKindOfClass:[NSString class]]){
-        jsmethod = [NSString stringWithFormat:@"%@('%@')",method,data];
-    }
-    [self.webView ba_web_stringByEvaluateJavaScript:jsmethod completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
-        
-    }];
-}
+//- (void)ba_web_callJs:(NSString *)method andData:(NSDictionary *)data
+//{
+//    NSError *error = nil;
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:&error];
+//    NSString *paramsJson = nil;
+//    if (error) {
+//        paramsJson = @"";
+//    } else {
+//        paramsJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    }
+//    NSString *jsmethod = [method stringByAppendingString:@"()"];
+//    if ([data isKindOfClass:[NSString class]]){
+//        jsmethod = [NSString stringWithFormat:@"%@('%@')",method,data];
+//    }
+//    [self.webView ba_web_stringByEvaluateJavaScript:jsmethod completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
+//        
+//    }];
+//}
 
 
 - (void)ba_web_loadHtmlWithModulesAndUrl:(NSString *)weexHtmlJs
@@ -438,38 +441,6 @@
     BaalWeexOrHtmlHandlerImpl<BaalWeexOrHtmlHandlerProtocol> *impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
     NSArray *modules = [impl ba_web_registerModules:self.webView andWeexParams:nil andCallback:nil];
     [self ba_web_loadHtmlWithModules:modules andWeexHtmlJs:weexHtmlJs];
-}
-
-
-- (void)test1
-{
-    Baal_webView_userContentControllerDidReceiveScriptMessageBlock block = ^(WKUserContentController *userContentController, WKScriptMessage *message){
-        NSDictionary *dict =message.body;
-        NSString *data = @"xxxx";//dict[@"params"];
-        
-        NSString *method = dict[@"method"];
-        NSString *jsmethod = [method stringByAppendingString:@"()"];
-        if ([data isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *dic = (NSDictionary*)data;
-            if (dic.count) {
-                jsmethod = [NSString stringWithFormat:@"%@(%@)",method,data];
-            }
-        }else if ([data isKindOfClass:[NSString class]] || [data isKindOfClass:[NSNumber class]]){
-            jsmethod = [NSString stringWithFormat:@"%@('%@')",method,data];
-        }
-        
-        [self.webView ba_web_stringByEvaluateJavaScript:jsmethod completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
-            
-        }];
-    };
-    
-    Baal_webView_userContentControllerDidReceiveScriptMessageBlock block1 = ^(WKUserContentController *userContentController, WKScriptMessage *message){
-        
-    };
-    NSString *htmlurl = @"http://192.168.103.70:8080/dist/web/views/setting/ModifyAccountView.js";
-    NSArray *modules  = @[@{@"moduleName":@"guide",@"moduleMethod":@{@"greeting":block,@"greeting1":block1}}];
-    
-    [self ba_web_loadHtmlWithModules:modules andWeexHtmlJs:htmlurl];
 }
 
 @end

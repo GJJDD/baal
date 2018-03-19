@@ -39,4 +39,26 @@
 + (NSDictionary *)handlerConfigs {
     return [BaalHandlerFactory sharedInstance].handlers;
 }
+
+
++ (void)weexModuleParams:(NSString *)params callback:(WXModuleCallback)callback
+{
+    
+    NSError *err;
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[params dataUsingEncoding:NSUTF8StringEncoding]
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&err];
+    
+    BaalWeexOrHtmlHandlerImpl<BaalWeexOrHtmlHandlerProtocol> *impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
+    NSArray *weexModule = [impl ba_web_registerModules:nil andWeexParams:params andCallback:callback];
+    [weexModule enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        NSString *moduleName = dict[@"moduleName"];
+        NSString *method = dict[@"methodName"];
+        if ([obj[@"moduleName"] isEqualToString:moduleName]) {
+            Baal_moduleMethodBlock block = obj[@"moduleMethod"][method];
+            block(NULL, NULL);
+        }
+    }];
+}
 @end

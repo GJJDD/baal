@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <WeexSDK/WeexSDK.h>
 @interface BaalHandlerFactory : NSObject
+
 /**
  * @abstract Register a handler for a given handler instance and specific protocol
  *
@@ -30,4 +31,5 @@
  */
 + (NSDictionary *)handlerConfigs;
 
++ (void)weexModuleParams:(NSString *)params callback:(WXModuleCallback)callback;
 @end
