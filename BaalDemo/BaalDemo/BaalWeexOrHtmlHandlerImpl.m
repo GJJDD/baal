@@ -11,7 +11,7 @@
 
 @implementation BaalWeexOrHtmlHandlerImpl
 
-- (NSArray *)ba_web_registerModules:(WKWebView *)webView andWeexParams:(NSString *)weexParamsJson andCallback:(WXModuleCallback)callback
+- (NSArray *)ba_web_registerModules:(WKWebView *)webView andWeexParams:(NSString *)weexParamsJson andCallback:(WXModuleKeepAliveCallback)callback
 {
     
     Baal_moduleMethodBlock block = ^(WKUserContentController *userContentController, WKScriptMessage *message){
@@ -27,19 +27,17 @@
         } else {
             /* 核心业务逻辑 */
             NSDictionary *returnData = @{@"name":@"zh"};
-            callback(returnData);
+            callback(returnData,false);
         }
     };
     Baal_moduleMethodBlock block1 = ^(WKUserContentController *userContentController, WKScriptMessage *message){
         
     };
     NSArray *modules  = @[@{@"moduleName":@"Guide",@"moduleMethod":@{@"greeting":block,@"greeting1":block1}}];
-    
-    
     return modules;
 }
 
-
+#pragma mark - private Method
 - (void)ba_web_callJs:(NSString *)method andData:(NSDictionary *)data andWebView:(WKWebView *)webView
 {
     NSError *error = nil;

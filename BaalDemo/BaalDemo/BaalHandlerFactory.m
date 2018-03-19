@@ -41,7 +41,7 @@
 }
 
 
-+ (void)weexModuleParams:(NSString *)params callback:(WXModuleCallback)callback
++ (void)weexModuleParams:(NSString *)params callback:(WXModuleKeepAliveCallback)callback
 {
     
     NSError *err;

@@ -303,6 +303,17 @@ Baal_getColumnCountWithArrayAndRowCount_pod(NSArray *array, NSInteger rowCount){
     return i;
 }
 
+CG_INLINE NSInteger Baal_getNavBarHeight() {
+    CGSize result = [[UIScreen mainScreen] currentMode].size;
+    CGFloat scale = [UIScreen mainScreen].scale;
+    result = CGSizeMake(result.width * scale, result.height * scale);
+    if(result.height >= 7308) {
+        return 88;
+    } else {
+        return 64;
+    }
+}
+
 typedef void (^Baal_moduleMethodBlock)(WKUserContentController *userContentController, WKScriptMessage *message);
 
 #endif /* Baal_ConfigurationDefine_h */

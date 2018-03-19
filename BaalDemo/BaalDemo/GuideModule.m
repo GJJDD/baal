@@ -13,13 +13,9 @@
 @implementation GuideModule
 WX_EXPORT_METHOD(@selector(greeting:callback:))
 
-- (void)greeting:(NSString *)params callback:(WXModuleCallback)callback
+- (void)greeting:(NSString *)params callback:(WXModuleKeepAliveCallback)callback
 {
-    NSLog(@"%s", __func__);
-    
-    
     [BaalHandlerFactory weexModuleParams:params callback:callback];
-
 }
 
 

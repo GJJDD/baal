@@ -203,7 +203,7 @@
 }
 
 #pragma mark - custom Method
-
+/*
 #pragma mark 导航栏的返回按钮
 - (void)configBackItem:(NSString *)leftImageName
 {
@@ -255,14 +255,20 @@
 {
     
 }
-
+*/
 
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    
-    self.webView.frame = CGRectMake(0, 0, Baal_SCREEN_WIDTH, Baal_SCREEN_HEIGHT);
-    self.progressView.frame = CGRectMake(0, 64, Baal_SCREEN_WIDTH, 20);
+    CGRect webViewRect;
+    CGRect progressViewRect = CGRectMake(0, Baal_getNavBarHeight(), Baal_SCREEN_WIDTH, 20);
+    if(self.navigationController.navigationBarHidden) {
+        webViewRect = CGRectMake(0, Baal_getNavBarHeight(), Baal_SCREEN_WIDTH, Baal_SCREEN_HEIGHT-Baal_getNavBarHeight());
+    } else {
+        webViewRect = CGRectMake(0, 0, Baal_SCREEN_WIDTH, Baal_SCREEN_HEIGHT);
+    }
+    self.webView.frame = webViewRect;
+    self.progressView.frame = progressViewRect;
 }
 
 #pragma mark - setter / getter
