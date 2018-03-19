@@ -8,9 +8,9 @@
 
 
 #import "BaalWeexWebViewController.h"
-
-
-
+#import "BaalHandlerFactory.h"
+#import "BaalWeexOrHtmlHandlerProtocol.h"
+#import "BaalWeexOrHtmlHandlerImpl.h"
 @interface BaalWeexWebViewController ()
 
 @property(nonatomic, strong) WKWebView *webView;
@@ -365,11 +365,11 @@
 
 
 // name:block,name1:block1
-- (void)ba_scriptMessageHandler:(NSMutableDictionary<NSString *,Baal_webView_userContentControllerDidReceiveScriptMessageBlock> *)messageNameScripts
+- (void)ba_scriptMessageHandler:(NSMutableDictionary<NSString *,Baal_webView_userContentControllerDidReceiveScriptMessageBlock> *)messageNameScripts 
 {
     [self.webView ba_web_addScriptMessageHandlerWithNameArray:[messageNameScripts allKeys]];
     self.webView.ba_web_userContentControllerDidReceiveScriptMessageBlock = ^(WKUserContentController * _Nonnull userContentController, WKScriptMessage * _Nonnull message) {
-        Baal_webView_userContentControllerDidReceiveScriptMessageBlock receiveScriptMessageBlock = [messageNameScripts valueForKey:message.name];
+        Baal_moduleMethodBlock receiveScriptMessageBlock = [messageNameScripts valueForKey:message.name];
         if (receiveScriptMessageBlock) {
             receiveScriptMessageBlock(userContentController,message);
         }
@@ -413,8 +413,32 @@
     [self ba_web_loadHTMLString:[self weexHtmlHybridModules:modulesArray andWeexHtmlJs:url]];
 }
 
+- (void)ba_web_callJs:(NSString *)method andData:(NSDictionary *)data
+{
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *paramsJson = nil;
+    if (error) {
+        paramsJson = @"";
+    } else {
+        paramsJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    NSString *jsmethod = [method stringByAppendingString:@"()"];
+    if ([data isKindOfClass:[NSString class]]){
+        jsmethod = [NSString stringWithFormat:@"%@('%@')",method,data];
+    }
+    [self.webView ba_web_stringByEvaluateJavaScript:jsmethod completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
+        
+    }];
+}
 
 
+- (void)ba_web_loadHtmlWithModulesAndUrl:(NSString *)weexHtmlJs
+{
+    BaalWeexOrHtmlHandlerImpl<BaalWeexOrHtmlHandlerProtocol> *impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
+    NSArray *modules = [impl ba_web_registerModules:self.webView andWeexParams:nil andCallback:nil];
+    [self ba_web_loadHtmlWithModules:modules andWeexHtmlJs:weexHtmlJs];
+}
 
 
 - (void)test1
@@ -423,7 +447,7 @@
         NSDictionary *dict =message.body;
         NSString *data = @"xxxx";//dict[@"params"];
         
-        NSString *method = dict[@"onSuccess"];
+        NSString *method = dict[@"method"];
         NSString *jsmethod = [method stringByAppendingString:@"()"];
         if ([data isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary*)data;
@@ -448,35 +472,4 @@
     [self ba_web_loadHtmlWithModules:modules andWeexHtmlJs:htmlurl];
 }
 
-
-//- (void)test
-//{
-//    Baal_webView_userContentControllerDidReceiveScriptMessageBlock block1 = ^(WKUserContentController *userContentController, WKScriptMessage *message){
-//        UIViewController *v = [[UIViewController alloc] init];
-//        [self.navigationController pushViewController:v animated:YES];
-//    };
-//
-//    Baal_webView_userContentControllerDidReceiveScriptMessageBlock block = ^(WKUserContentController *userContentController, WKScriptMessage *message){
-//        NSDictionary *dict =message.body;
-//        NSString *data = @"xxxx";//dict[@"params"];
-//
-//        NSString *method = dict[@"onSuccess"];
-//        NSString *jsmethod = [method stringByAppendingString:@"()"];
-//        if ([data isKindOfClass:[NSDictionary class]]) {
-//            NSDictionary *dic = (NSDictionary*)data;
-//            if (dic.count) {
-//                jsmethod = [NSString stringWithFormat:@"%@(%@)",method,data];
-//            }
-//        }else if ([data isKindOfClass:[NSString class]] || [data isKindOfClass:[NSNumber class]]){
-//            jsmethod = [NSString stringWithFormat:@"%@('%@')",method,data];
-//        }
-//
-//        [self.webView ba_web_stringByEvaluateJavaScript:jsmethod completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
-//
-//        }];
-//
-//    };
-//    NSDictionary *d = @{@"greeting":block, @"greeting1":block1};
-//    [messageNameScripts addEntriesFromDictionary:d];
-//}
 @end

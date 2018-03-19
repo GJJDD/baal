@@ -76,6 +76,8 @@ NS_ASSUME_NONNULL_BEGIN
  * @param url     webpack打包生成的url
  */
 - (void)ba_web_loadHtmlWithModules:(NSArray *)modules andWeexHtmlJs:(NSString *)url;
+
+- (void)ba_web_loadHtmlWithModulesAndUrl:(NSString *)weexHtmlJs;
 - (void)test1;
 @end
 NS_ASSUME_NONNULL_END

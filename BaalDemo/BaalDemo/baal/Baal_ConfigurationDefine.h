@@ -303,5 +303,6 @@ Baal_getColumnCountWithArrayAndRowCount_pod(NSArray *array, NSInteger rowCount){
     return i;
 }
 
+typedef void (^Baal_moduleMethodBlock)(WKUserContentController *userContentController, WKScriptMessage *message);
 
 #endif /* Baal_ConfigurationDefine_h */
