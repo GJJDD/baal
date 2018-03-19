@@ -18,7 +18,6 @@
 		391DAF34205FAB4B008FF663 /* WKWebView+Baal.m in Sources */ = {isa = PBXBuildFile; fileRef = 391DAF2E205FAB4B008FF663 /* WKWebView+Baal.m */; };
 		391DAF35205FAB4B008FF663 /* WKWebView+BaalJavaScriptAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 391DAF30205FAB4B008FF663 /* WKWebView+BaalJavaScriptAlert.m */; };
 		391DAF36205FAB4B008FF663 /* WKWebView+Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 391DAF32205FAB4B008FF663 /* WKWebView+Post.m */; };
-		393DAEF42058CFFE0058CE36 /* nativehelper.js in Resources */ = {isa = PBXBuildFile; fileRef = 393DAEF32058CFFE0058CE36 /* nativehelper.js */; };
 		393DAEFD205BC1F50058CE36 /* BaalHandlerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 393DAEFC205BC1F50058CE36 /* BaalHandlerFactory.m */; };
 		393DAF02205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 393DAF01205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.m */; };
 		39519C3E205014E30036A87B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39519C3D205014E30036A87B /* AppDelegate.m */; };
@@ -70,7 +69,6 @@
 		391DAF30205FAB4B008FF663 /* WKWebView+BaalJavaScriptAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+BaalJavaScriptAlert.m"; sourceTree = "<group>"; };
 		391DAF31205FAB4B008FF663 /* WKWebView+Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+Post.h"; sourceTree = "<group>"; };
 		391DAF32205FAB4B008FF663 /* WKWebView+Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+Post.m"; sourceTree = "<group>"; };
-		393DAEF32058CFFE0058CE36 /* nativehelper.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = nativehelper.js; sourceTree = "<group>"; };
 		393DAEFB205BC1F50058CE36 /* BaalHandlerFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaalHandlerFactory.h; sourceTree = "<group>"; };
 		393DAEFC205BC1F50058CE36 /* BaalHandlerFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaalHandlerFactory.m; sourceTree = "<group>"; };
 		393DAEFF205BC7900058CE36 /* BaalWeexOrHtmlHandlerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaalWeexOrHtmlHandlerProtocol.h; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 				39519C3F205014E30036A87B /* BaalWeexWebViewController.h */,
 				39519C40205014E30036A87B /* BaalWeexWebViewController.m */,
 				39519C45205014E30036A87B /* Assets.xcassets */,
-				393DAEF32058CFFE0058CE36 /* nativehelper.js */,
 				39519C47205014E30036A87B /* LaunchScreen.storyboard */,
 				39519C4A205014E30036A87B /* Info.plist */,
 				39519C4B205014E30036A87B /* main.m */,
@@ -356,7 +353,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				393DAEF42058CFFE0058CE36 /* nativehelper.js in Resources */,
 				39519C49205014E30036A87B /* LaunchScreen.storyboard in Resources */,
 				39519C46205014E30036A87B /* Assets.xcassets in Resources */,
 				391DAF1E205F66D5008FF663 /* WeexpluginConfig.xml in Resources */,
