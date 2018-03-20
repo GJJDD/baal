@@ -22,6 +22,8 @@
 		391DAF55205FB9DB008FF663 /* BaalHandlerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 391DAF53205FB9DB008FF663 /* BaalHandlerFactory.m */; };
 		391DAF58205FBAE5008FF663 /* NotifyChannelModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 391DAF57205FBAE5008FF663 /* NotifyChannelModule.m */; };
 		391DAF5B205FBB1A008FF663 /* NotifyChannelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 391DAF5A205FBB1A008FF663 /* NotifyChannelManager.m */; };
+		391DAF5F205FE91F008FF663 /* NotifyChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 391DAF5D205FE91F008FF663 /* NotifyChannelViewController.m */; };
+		391DAF60205FE91F008FF663 /* NotifyChannelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 391DAF5E205FE91F008FF663 /* NotifyChannelViewController.xib */; };
 		393DAF02205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 393DAF01205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.m */; };
 		39519C3E205014E30036A87B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39519C3D205014E30036A87B /* AppDelegate.m */; };
 		39519C46205014E30036A87B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39519C45205014E30036A87B /* Assets.xcassets */; };
@@ -80,6 +82,9 @@
 		391DAF57205FBAE5008FF663 /* NotifyChannelModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotifyChannelModule.m; sourceTree = "<group>"; };
 		391DAF59205FBB1A008FF663 /* NotifyChannelManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotifyChannelManager.h; sourceTree = "<group>"; };
 		391DAF5A205FBB1A008FF663 /* NotifyChannelManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotifyChannelManager.m; sourceTree = "<group>"; };
+		391DAF5C205FE91F008FF663 /* NotifyChannelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotifyChannelViewController.h; sourceTree = "<group>"; };
+		391DAF5D205FE91F008FF663 /* NotifyChannelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotifyChannelViewController.m; sourceTree = "<group>"; };
+		391DAF5E205FE91F008FF663 /* NotifyChannelViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotifyChannelViewController.xib; sourceTree = "<group>"; };
 		393DAF00205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaalWeexOrHtmlHandlerImpl.h; sourceTree = "<group>"; };
 		393DAF01205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaalWeexOrHtmlHandlerImpl.m; sourceTree = "<group>"; };
 		39519C39205014E30036A87B /* BaalDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaalDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -233,6 +238,9 @@
 				39519C4B205014E30036A87B /* main.m */,
 				393DAF00205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.h */,
 				393DAF01205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.m */,
+				391DAF5C205FE91F008FF663 /* NotifyChannelViewController.h */,
+				391DAF5D205FE91F008FF663 /* NotifyChannelViewController.m */,
+				391DAF5E205FE91F008FF663 /* NotifyChannelViewController.xib */,
 			);
 			path = BaalDemo;
 			sourceTree = "<group>";
@@ -388,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39519C49205014E30036A87B /* LaunchScreen.storyboard in Resources */,
+				391DAF60205FE91F008FF663 /* NotifyChannelViewController.xib in Resources */,
 				39519C46205014E30036A87B /* Assets.xcassets in Resources */,
 				391DAF1E205F66D5008FF663 /* WeexpluginConfig.xml in Resources */,
 			);
@@ -537,6 +546,7 @@
 				391DAF21205F66D5008FF663 /* WeexPluginManager.m in Sources */,
 				391DAF20205F66D5008FF663 /* WeexPluginLoader.m in Sources */,
 				391DAF50205FB9CF008FF663 /* BaalWeexWebViewController.m in Sources */,
+				391DAF5F205FE91F008FF663 /* NotifyChannelViewController.m in Sources */,
 				391DAF5B205FBB1A008FF663 /* NotifyChannelManager.m in Sources */,
 				391DAF42205FB904008FF663 /* WeakScriptMessageDelegate.m in Sources */,
 			);

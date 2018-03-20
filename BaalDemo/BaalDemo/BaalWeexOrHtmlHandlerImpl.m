@@ -7,11 +7,11 @@
 //
 
 #import "BaalWeexOrHtmlHandlerImpl.h"
-
-
+#import "NotifyChannelViewController.h"
+#import "AppDelegate.h"
 @implementation BaalWeexOrHtmlHandlerImpl
 
-- (NSArray *)ba_registerModules:(WKWebView *)webView andWeexParams:(NSString *)weexParamsJson andCallback:(WXModuleKeepAliveCallback)callback
+- (NSMutableArray *)ba_registerModules:(WKWebView *)webView andWeexParams:(NSString *)weexParamsJson andCallback:(WXModuleKeepAliveCallback)callback
 {
     
     Baal_moduleMethodBlock block = ^(WKUserContentController *userContentController, WKScriptMessage *message){
@@ -30,10 +30,26 @@
         }
     };
     Baal_moduleMethodBlock block1 = ^(WKUserContentController *userContentController, WKScriptMessage *message){
+        NSDictionary *dict = dictionaryToJson(message?message.body:weexParamsJson);
+        NSDictionary *params = dict[@"params"];
+        if (message) {
+            /* 核心业务逻辑 */
+            NSDictionary *returnData = @{@"name":@"zh"};
+            
+            NotifyChannelViewController *v = [[NotifyChannelViewController alloc] initWithNibName:@"NotifyChannelViewController" bundle:nil];
+            [(UINavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController pushViewController:v animated:YES];
+            
         
+            
+        } else {
+            /* 核心业务逻辑 */
+            NSDictionary *returnData = @{@"name":@"zh"};
+            callback(returnData,false);
+        }
     };
-    NSArray *modules  = @[@{@"moduleName":@"Guide",@"moduleMethod":@{@"greeting":block,@"greeting1":block1}}];
-    return modules;
+    NSArray *modules  = @[@{@"moduleName":@"Guide",@"moduleMethod":@{@"greeting":block,@"pushNotify":block1}}];
+    
+    return [NSMutableArray arrayWithArray:modules];
 }
 
 

@@ -333,6 +333,9 @@ CG_INLINE NSString * ba_web_callJs(NSString *method, NSDictionary *data)
 }
 
 CG_INLINE NSDictionary * dictionaryToJson(NSString *json){
+    if (![json isKindOfClass:[NSString class]]) {
+        return NULL;
+    }
     NSError *err;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding]
                                                          options:NSJSONReadingMutableContainers

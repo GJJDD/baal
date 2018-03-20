@@ -18,7 +18,6 @@ WX_EXPORT_METHOD(@selector(unregisterMessageCallBack:))
 
 - (void)registerMessage:(nonnull NSString *)params andMessageChannelCallback:(nonnull NotifyChannelCallback)messageChannelCallback
 {
-    
     NSDictionary *dict = dictionaryToJson(params);
     [[NotifyChannelManager shared] registerMessage:dict[@"params"][@"name"] andMessageChannelCallback:messageChannelCallback andPointAddress:[NSString stringWithFormat:@"%p",weexInstance.viewController]];
 }
