@@ -37,8 +37,8 @@
     </feature>
     <feature name="NotifyChannelModule">
         <param name="category" value="module" />
-        <param name="ios-package" value="NotifyChannel" />
-        <param name="api" value="Guide" />
+        <param name="ios-package" value="NotifyChannelModule" />
+        <param name="api" value="NotifyChannel" />
     </feature>
     
 </widget>

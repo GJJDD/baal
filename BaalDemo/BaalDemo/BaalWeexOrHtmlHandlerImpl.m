@@ -8,6 +8,7 @@
 
 #import "BaalWeexOrHtmlHandlerImpl.h"
 #import "NotifyChannelViewController.h"
+#import "BaalWeexViewController.h"
 #import "AppDelegate.h"
 @implementation BaalWeexOrHtmlHandlerImpl
 
@@ -36,7 +37,10 @@
             /* 核心业务逻辑 */
             NSDictionary *returnData = @{@"name":@"zh"};
             
-            NotifyChannelViewController *v = [[NotifyChannelViewController alloc] initWithNibName:@"NotifyChannelViewController" bundle:nil];
+//            NotifyChannelViewController *v = [[NotifyChannelViewController alloc] initWithNibName:@"NotifyChannelViewController" bundle:nil];
+            
+            
+            BaalWeexViewController *v = [[BaalWeexViewController alloc] initWithSourceURL:[NSURL URLWithString:@"http://192.168.103.70:8080/dist/weex/views/account/BindAlipayView.js"] Params:@{@"name":@"zhansan"}];
             [(UINavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController pushViewController:v animated:YES];
             
         

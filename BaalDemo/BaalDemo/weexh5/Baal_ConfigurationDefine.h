@@ -346,6 +346,59 @@ CG_INLINE NSDictionary * dictionaryToJson(NSString *json){
     return dict;
 }
 
+CG_INLINE NSMutableDictionary* ba_getURLParameters(NSString *url) {
+    NSRange range = [url rangeOfString:@"?"];
+    if(range.location==NSNotFound) {
+        return nil;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    NSString *parametersString = [url substringFromIndex:range.location+1];
+    if([parametersString containsString:@"&"]) {
+        NSArray *urlComponents = [parametersString componentsSeparatedByString:@"&"];
+        for(NSString *keyValuePair in urlComponents) {
+            //生成key/value
+            NSArray *pairComponents = [keyValuePair componentsSeparatedByString:@"="];
+            NSString *key = [pairComponents.firstObject stringByRemovingPercentEncoding];
+            NSString*value = [pairComponents.lastObject stringByRemovingPercentEncoding];
+            //key不能为nil
+            if(key==nil|| value ==nil) {
+                continue;
+            }
+            id existValue = [params valueForKey:key];
+            if(existValue !=nil) {
+                //已存在的值，生成数组。
+                if([existValue isKindOfClass:[NSArray class]]) {
+                    //已存在的值生成数组
+                    NSMutableArray*items = [NSMutableArray arrayWithArray:existValue];
+                    [items addObject:value];
+                    [params setValue:items forKey:key];
+                }else{
+                    //非数组
+                    [params setValue:@[existValue,value]forKey:key];
+                }
+            }else{
+                //设置值
+                [params setValue:value forKey:key];
+            }
+        }
+    }else{
+        //单个参数生成key/value
+        NSArray *pairComponents = [parametersString componentsSeparatedByString:@"="];
+        if(pairComponents.count==1) {
+            return nil;
+        }
+        //分隔值
+        NSString *key = [pairComponents.firstObject stringByRemovingPercentEncoding];
+        NSString *value = [pairComponents.lastObject stringByRemovingPercentEncoding];
+        //key不能为nil
+        if(key ==nil|| value ==nil) {
+            return nil;
+        }
+        //设置值
+        [params setValue:value forKey:key];
+    }
+    return params;
+}
 
 #import <WebKit/WebKit.h>
 typedef void (^Baal_moduleMethodBlock)(WKUserContentController *userContentController, WKScriptMessage *message);
