@@ -5,7 +5,7 @@
         A Weexplugin application that responds to the deviceready event.
     </description>
     <author email=" " href="http://www.dianwoda.com/">
-        fojiasanbao Weex Team
+        dianwoda Weex Team
     </author>
     <content src="index.html" />
     <access origin="*" />
