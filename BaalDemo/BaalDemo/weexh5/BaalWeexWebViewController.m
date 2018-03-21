@@ -396,7 +396,10 @@
 // 封装weex-h5 module
 - (NSString *)weexHtmlHybridModules:(NSArray *)modules andWeexHtmlJs:(NSString *)url
 {
-    NSString *nativeHybrid = @"        <script>\n            var nativeHybrid = {}\n            if (weex.config.env.platform === 'Web') {\n                window.NativeHybrid = nativeHybrid\n                if (window.Vue) {\n                    window.Vue.use(nativeHybrid)\n                }\n            }\n        </script>\n        \n    \n";
+    
+    NSString *bundleUrl = [NSString stringWithFormat:@"\n    nativeHybrid.bundleUrl = function() {\n        return '%@'\n}\n", url];
+    
+    NSString *nativeHybrid = [NSString stringWithFormat:@"        <script>\n            var nativeHybrid = {}\n            if (weex.config.env.platform === 'Web') {\n                window.NativeHybrid = nativeHybrid\n                if (window.Vue) {\n                    window.Vue.use(nativeHybrid)\n                }\n            }\n%@        </script>\n        \n    \n",bundleUrl];
     NSMutableString *weexhtmlModule = [NSMutableString string];
     [modules enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSMutableString *weexhtmlMethod = [NSMutableString string];

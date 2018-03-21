@@ -28,8 +28,18 @@
     BaalWeexWebViewController *vc = [[BaalWeexWebViewController alloc] init];
     [vc setBa_web_progressTintColor:[UIColor redColor]];
     vc.fullScreen = YES;
+    
+//    NSString *file = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
+//
+//    NSString *js = [NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil];
+//    [vc ba_web_loadHTMLString:js];
+
+
+    
     [vc ba_web_loadHtmlWithModulesAndUrl:@"http://192.168.103.70:8080/dist/web/views/setting/ModifyAccountView.js"];
 //    WXBaseViewController *vc = [[WXBaseViewController alloc] initWithSourceURL:[NSURL URLWithString:@"http://192.168.103.70:8080/dist/weex/views/setting/ModifyAccountView.js"]];
+    
+    
     UINavigationController *rootViewController = [[UINavigationController alloc] initWithRootViewController:vc];
 //    [rootViewController setNavigationBarHidden:YES];
     

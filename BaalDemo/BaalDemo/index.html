@@ -1,0 +1,14 @@
+<script>
+    var nativeHybrid = {}
+    if (weex.config.env.platform === 'Web') {
+        window.NativeHybrid = nativeHybrid
+        if (window.Vue) {
+            window.Vue.use(nativeHybrid)
+        }
+    }
+    nativeHybrid.bundleUrl = function() {
+        return 'http://m.baidu.com'
+    }
+</script>
+
+   
