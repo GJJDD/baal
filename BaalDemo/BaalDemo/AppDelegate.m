@@ -35,9 +35,7 @@
 //    [vc ba_web_loadHTMLString:js];
 
     
-    NSString *url = [self keyValueStringAndUrl:@"http://192.168.103.70:8080/dist/web/views/setting/ModifyAccountView.js" andParams:@{@"name":@"xxxx", @"age":@"年龄"}];
-
-    [vc ba_web_loadHtmlWithModulesAndUrl:url];
+    [vc ba_web_loadHtmlWithModulesAndUrl:@"http://192.168.103.70:8080/dist/web/views/setting/ModifyAccountView.js" andParams:@{@"name":@"xxxx", @"age":@"年龄"}];
 //    WXBaseViewController *vc = [[WXBaseViewController alloc] initWithSourceURL:[NSURL URLWithString:@"http://192.168.103.70:8080/dist/weex/views/setting/ModifyAccountView.js"]];
     
     
@@ -49,25 +47,6 @@
     return YES;
 }
 
-- (NSString *)keyValueStringAndUrl:(NSString *)url andParams:(NSDictionary *)dict
-{
-    if (dict == nil) {
-        return nil;
-    }
-    NSMutableString *string = [NSMutableString stringWithFormat:@"%@?",url];
-    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [string appendFormat:@"%@=%@&",key,obj];
-    }];
-    
-    if ([string rangeOfString:@"&"].length) {
-        [string deleteCharactersInRange:NSMakeRange(string.length - 1, 1)];
-    }
-    
-    NSCharacterSet *encodeUrlSet = [NSCharacterSet URLQueryAllowedCharacterSet];
-    NSString *encodeUrl = [string stringByAddingPercentEncodingWithAllowedCharacters:encodeUrlSet];
-    
-    return string;
-}
 
 
 
