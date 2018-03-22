@@ -400,6 +400,11 @@ CG_INLINE NSMutableDictionary* ba_getURLParameters(NSString *url) {
     return params;
 }
 
+CG_INLINE NSString* baal_encodeUrl(NSString *url) {
+    NSCharacterSet *encodeUrlSet = [NSCharacterSet URLQueryAllowedCharacterSet];
+    NSString *encodeUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:encodeUrlSet];
+    return encodeUrl;
+}
 #import <WebKit/WebKit.h>
 typedef void (^Baal_moduleMethodBlock)(WKUserContentController *userContentController, WKScriptMessage *message);
 

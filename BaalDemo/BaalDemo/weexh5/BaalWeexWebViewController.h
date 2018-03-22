@@ -80,7 +80,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)ba_web_loadHtmlWithModules:(NSArray *)modules andWeexHtmlJs:(NSString *)url;
 
 - (void)ba_web_loadHtmlWithModulesAndUrl:(NSString *)weexHtmlJs;
-
+/**
+ * 加载weex-h5 url
+ * @param url     webpack打包生成的url
+ * @param params     需要携带的参数
+ */
+- (void)ba_web_loadHtmlWithModulesAndUrl:(NSString *)weexHtmlJs andParams:(NSDictionary *)params;
 @end
 NS_ASSUME_NONNULL_END
 

@@ -30,14 +30,22 @@
 
 - (void)ba_pushWeexH5ViewController:(NSString *)url params:(NSDictionary *)params
 {
+    BaalWeexWebViewController *vc = [[BaalWeexWebViewController alloc] init];
+//    [self keyValueStringandUrl:url andParams:@{@"name":@"xxxx", @"age":@"年龄"}];
     
-//    BaalWeexWebViewController *vc = [[BaalWeexWebViewController alloc] init];
-//    vc ba_web_loadHtmlWithModulesAndUrl:url
+    [vc ba_web_loadHtmlWithModulesAndUrl:url];
+    [(UINavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController pushViewController:vc animated:YES];
 }
 
 - (void)ba_pushWeexViewController:(NSString *)url Params:(NSDictionary *)params
 {
   
 }
+
+
+
+
+
+
 
 @end

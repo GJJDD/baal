@@ -397,7 +397,7 @@
 - (NSString *)weexHtmlHybridModules:(NSArray *)modules andWeexHtmlJs:(NSString *)url
 {
     
-    NSString *bundleUrl = [NSString stringWithFormat:@"\n    nativeHybrid.bundleUrl = function() {\n        return '%@'\n}\n", url];
+    NSString *bundleUrl = [NSString stringWithFormat:@"\n    weex.config.bundleUrl = '%@'\n", url];
     
     NSString *nativeHybrid = [NSString stringWithFormat:@"        <script>\n            var nativeHybrid = {}\n            if (weex.config.env.platform === 'Web') {\n                window.NativeHybrid = nativeHybrid\n                if (window.Vue) {\n                    window.Vue.use(nativeHybrid)\n                }\n            }\n%@        </script>\n        \n    \n",bundleUrl];
     NSMutableString *weexhtmlModule = [NSMutableString string];
@@ -439,6 +439,27 @@
     [modules addObject:[self ba_web_notifyChannelModule]];
     [self ba_web_loadHtmlWithModules:modules andWeexHtmlJs:weexHtmlJs];
 }
+
+
+- (void)ba_web_loadHtmlWithModulesAndUrl:(NSString *)weexHtmlJs andParams:(NSDictionary *)params
+{
+    if (params == nil) {
+        params = @{};
+    }
+    NSMutableString *string = [NSMutableString stringWithFormat:@"%@?",weexHtmlJs];
+    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [string appendFormat:@"%@=%@&",key,obj];
+    }];
+    
+    if ([string rangeOfString:@"&"].length) {
+        [string deleteCharactersInRange:NSMakeRange(string.length - 1, 1)];
+    }
+    
+    NSCharacterSet *encodeUrlSet = [NSCharacterSet URLQueryAllowedCharacterSet];
+    NSString *encodeUrl = [string stringByAddingPercentEncodingWithAllowedCharacters:encodeUrlSet];
+    [self ba_web_loadHtmlWithModulesAndUrl:encodeUrl];
+}
+
 - (NSDictionary *)ba_web_notifyChannelModule
 {
     Baal_moduleMethodBlock registerMessage = ^(WKUserContentController *userContentController, WKScriptMessage *message){
