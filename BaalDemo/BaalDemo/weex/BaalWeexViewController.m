@@ -28,7 +28,7 @@
 
 - (instancetype)initWithSourceURL:(NSURL *)sourceURL
 {
-    return [self initWithSourceURL:sourceURL Params:nil];
+    return [self initWithSourceURL:sourceURL andParams:nil];
 }
 
 - (instancetype)initWithSourceURL:(NSURL *)sourceURL andParams:(NSDictionary *)params
