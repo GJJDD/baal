@@ -11,5 +11,6 @@
 @interface UIViewController (BaalBase)
 @property (nonatomic, copy) NSString *pageId;
 @property (nonatomic, strong) NSDictionary *params;
-
+// 判断是否是当前的页面
+- (BOOL)currentPage:(NSString *)name;
 @end

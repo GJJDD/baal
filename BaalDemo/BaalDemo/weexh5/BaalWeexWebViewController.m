@@ -443,6 +443,7 @@
 
 - (void)ba_web_loadHtmlWithModulesAndUrl:(NSString *)weexHtmlJs andParams:(NSDictionary *)params
 {
+    self.params = params;
     if (params == nil) {
         params = @{};
     }

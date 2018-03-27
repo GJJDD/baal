@@ -40,7 +40,7 @@
 //            NotifyChannelViewController *v = [[NotifyChannelViewController alloc] initWithNibName:@"NotifyChannelViewController" bundle:nil];
             
             
-            BaalWeexViewController *v = [[BaalWeexViewController alloc] initWithSourceURL:[NSURL URLWithString:@"http://192.168.103.70:8080/dist/weex/views/account/BindAlipayView.js"] Params:@{@"name":@"zhansan"}];
+            BaalWeexViewController *v = [[BaalWeexViewController alloc] initWithSourceURL:[NSURL URLWithString:@"http://192.168.103.70:8080/dist/weex/views/account/BindAlipayView.js"] andParams:@{@"name":@"zhansan"}];
             [(UINavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController pushViewController:v animated:YES];
             
         

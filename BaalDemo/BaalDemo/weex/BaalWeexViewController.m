@@ -31,11 +31,12 @@
     return [self initWithSourceURL:sourceURL Params:nil];
 }
 
-- (instancetype)initWithSourceURL:(NSURL *)sourceURL Params:(NSDictionary *)params
+- (instancetype)initWithSourceURL:(NSURL *)sourceURL andParams:(NSDictionary *)params
 {
     if ((self = [super init])) {
         self.sourceURL = sourceURL;
         self.hidesBottomBarWhenPushed = YES;
+        self.params = params;
         if (params && [params allKeys].count) {
             [self configureParamsUrlTag:params];
         }

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UIViewController+BaalBase.h"
 @interface BaalWeexViewController : UIViewController
 
-- (instancetype)initWithSourceURL:(NSURL *)sourceURL Params:(NSDictionary *)params;
+- (instancetype)initWithSourceURL:(NSURL *)sourceURL andParams:(NSDictionary *)params;
 
 /**
  * @abstract initializes the viewcontroller with bundle url.

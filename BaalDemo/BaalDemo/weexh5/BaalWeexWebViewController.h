@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Baal_WebView.h"
+#import "UIViewController+BaalBase.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BaalWeexWebViewController : UIViewController
@@ -82,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)ba_web_loadHtmlWithModulesAndUrl:(NSString *)weexHtmlJs;
 /**
  * 加载weex-h5 url
- * @param url     webpack打包生成的url
+ * @param weexHtmlJs     webpack打包生成的url
  * @param params     需要携带的参数
  */
 - (void)ba_web_loadHtmlWithModulesAndUrl:(NSString *)weexHtmlJs andParams:(NSDictionary *)params;
