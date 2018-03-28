@@ -6,26 +6,26 @@
 //  Copyright © 2018年 dianwoda. All rights reserved.
 //
 
-#import "NotifyChannelManager.h"
-@implementation NotifyChannel
+#import "BaalNotifyChannelManager.h"
+@implementation BaalNotifyChannel
 
 @end
 
-@interface NotifyChannelManager ()
+@interface BaalNotifyChannelManager ()
 
-@property (nonatomic, strong) NSMutableDictionary<NSString *, NSMutableArray<NotifyChannel *> *> *notifyQueue;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSMutableArray<BaalNotifyChannel *> *> *notifyQueue;
 @property (nonatomic, strong) NSLock *notifyQueueLock;
 @end
 
 
-@implementation NotifyChannelManager
+@implementation BaalNotifyChannelManager
 
 
 + (instancetype)shared {
-    static NotifyChannelManager *manager;
+    static BaalNotifyChannelManager *manager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        manager = [[NotifyChannelManager alloc] init];
+        manager = [[BaalNotifyChannelManager alloc] init];
     });
     return manager;
 }
@@ -35,7 +35,7 @@
     @synchronized(self) {
         self = [super init];
         if (self) {
-            _notifyQueue = [NSMutableDictionary<NSString *,NSMutableArray<NotifyChannel *> *> dictionary];
+            _notifyQueue = [NSMutableDictionary<NSString *,NSMutableArray<BaalNotifyChannel *> *> dictionary];
             _notifyQueueLock = [[NSLock alloc] init];
          
         }
@@ -46,14 +46,14 @@
 
 
 
-- (void)registerMessage:(NSString *)message andMessageChannelCallback:(NotifyChannelCallback)messageChannelCallback andPointAddress:(NSString *)pointAddress
+- (void)registerMessage:(NSString *)message andMessageChannelCallback:(BaalNotifyChannelCallback)messageChannelCallback andPointAddress:(NSString *)pointAddress
 {
     [_notifyQueueLock lock];
-    NSMutableArray<NotifyChannel *> *notifyCallbackArray = [self.notifyQueue valueForKey:message];
+    NSMutableArray<BaalNotifyChannel *> *notifyCallbackArray = [self.notifyQueue valueForKey:message];
     if (!notifyCallbackArray) {
-        notifyCallbackArray = [NSMutableArray<NotifyChannel *> array];
+        notifyCallbackArray = [NSMutableArray<BaalNotifyChannel *> array];
     }
-    NotifyChannel *notifyChannel = [[NotifyChannel alloc] init];
+    BaalNotifyChannel *notifyChannel = [[BaalNotifyChannel alloc] init];
     notifyChannel.callback = messageChannelCallback;
     notifyChannel.pointAddress = pointAddress;
     [notifyCallbackArray addObject:notifyChannel];
@@ -64,12 +64,12 @@
 - (void)unregisterMessage:(NSString *)message andPointAddress:(NSString *)pointAddress
 {
     [_notifyQueueLock lock];
-    NSMutableArray<NotifyChannel *> *notifyCallbackArray = [self.notifyQueue valueForKeyPath:message];
+    NSMutableArray<BaalNotifyChannel *> *notifyCallbackArray = [self.notifyQueue valueForKeyPath:message];
     if (!notifyCallbackArray) {
         NSLog(@"未被注册");
         return;
     }
-    for (NotifyChannel *notifyChannel in notifyCallbackArray) {
+    for (BaalNotifyChannel *notifyChannel in notifyCallbackArray) {
         if ([notifyChannel.pointAddress isEqualToString:pointAddress]) {
             [notifyCallbackArray removeObject:notifyChannel];
             return;
@@ -90,10 +90,10 @@
 - (void)postMessage:(NSString *)message andData:(id)data
 {
     [_notifyQueueLock lock];
-    NSMutableArray<NotifyChannel *> *notifyCallbackArray = [self.notifyQueue valueForKeyPath:message];
+    NSMutableArray<BaalNotifyChannel *> *notifyCallbackArray = [self.notifyQueue valueForKeyPath:message];
     
     if (notifyCallbackArray && notifyCallbackArray.count>0) {
-        [notifyCallbackArray enumerateObjectsUsingBlock:^(NotifyChannel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [notifyCallbackArray enumerateObjectsUsingBlock:^(BaalNotifyChannel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             obj.callback(data,true);
         }];
     }

@@ -7,16 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef void (^NotifyChannelCallback)(id _Nullable result, BOOL keepAlive);
+typedef void (^BaalNotifyChannelCallback)(id _Nullable result, BOOL keepAlive);
 
-@interface NotifyChannel : NSObject
+@interface BaalNotifyChannel : NSObject
 @property (nonatomic, copy) NSString *pointAddress;
-@property (nonatomic, copy) NotifyChannelCallback callback;
+@property (nonatomic, copy) BaalNotifyChannelCallback callback;
 @end;
-@interface NotifyChannelManager : NSObject
+@interface BaalNotifyChannelManager : NSObject
 + (instancetype _Nonnull)shared;
 
-- (void)registerMessage:(NSString * _Nonnull)message andMessageChannelCallback:(NotifyChannelCallback _Nonnull)messageChannelCallback andPointAddress:(NSString * _Nonnull)pointAddress;
+- (void)registerMessage:(NSString * _Nonnull)message andMessageChannelCallback:(BaalNotifyChannelCallback _Nonnull)messageChannelCallback andPointAddress:(NSString * _Nonnull)pointAddress;
 - (void)unregisterMessage:(NSString * _Nonnull)message;
 - (void)unregisterMessage:(NSString * _Nonnull)message andPointAddress:(NSString * _Nonnull)pointAddress;
 - (void)postMessage:(NSString * _Nonnull)message andData: (id)data;

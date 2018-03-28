@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <WeexSDK/WeexSDK.h>
-@interface NotifyChannelModule : NSObject<WXModuleProtocol>
+@interface BaalNotifyChannelModule : NSObject<WXModuleProtocol>
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "NotifyChannelViewController.h"
-#import "NotifyChannelManager.h"
+#import "BaalNotifyChannelManager.h"
 @interface NotifyChannelViewController ()
 
 @end
@@ -20,7 +20,7 @@
 }
 - (IBAction)notifyClick:(UIButton *)sender {
     
-    [[NotifyChannelManager shared] postMessage:@"A" andData:@{@"name":@"123"}];
+    [[BaalNotifyChannelManager shared] postMessage:@"A" andData:@{@"name":@"123"}];
 }
 
 

@@ -11,7 +11,7 @@
 #import "BaalHandlerFactory.h"
 #import "BaalWeexOrHtmlHandlerProtocol.h"
 #import "BaalWeexOrHtmlHandlerImpl.h"
-#import "NotifyChannelManager.h"
+#import "BaalNotifyChannelManager.h"
 @interface BaalWeexWebViewController ()
 
 @property(nonatomic, strong) WKWebView *webView;
@@ -466,26 +466,26 @@
     Baal_moduleMethodBlock registerMessage = ^(WKUserContentController *userContentController, WKScriptMessage *message){
         NSDictionary *dict = dictionaryToJson(message.body);
         NSDictionary *params = dict[@"params"];
-        NotifyChannelCallback callback =  ^(id _Nullable result,BOOL keepAlive){
+        BaalNotifyChannelCallback callback =  ^(id _Nullable result,BOOL keepAlive){
             [self.webView evaluateJavaScript:ba_web_callJs(dict[@"callbackJsMethod"], result) completionHandler:^(id _Nullable result, NSError * _Nullable error) {
                 
             }];
         };
-        [[NotifyChannelManager shared] registerMessage:params[@"name"] andMessageChannelCallback:callback andPointAddress:[NSString stringWithFormat:@"%p",self]];
+        [[BaalNotifyChannelManager shared] registerMessage:params[@"name"] andMessageChannelCallback:callback andPointAddress:[NSString stringWithFormat:@"%p",self]];
     };
     Baal_moduleMethodBlock unregisterMessage = ^(WKUserContentController *userContentController, WKScriptMessage *message){
         NSDictionary *params = dictionaryToJson(message.body)[@"params"];
-        [[NotifyChannelManager shared] unregisterMessage:params[@"name"]];
+        [[BaalNotifyChannelManager shared] unregisterMessage:params[@"name"]];
     };
     Baal_moduleMethodBlock unregisterMessageCallBack = ^(WKUserContentController *userContentController, WKScriptMessage *message){
         NSDictionary *params = dictionaryToJson(message.body)[@"params"];
-         [[NotifyChannelManager shared] unregisterMessage:params[@"name"] andPointAddress:[NSString stringWithFormat:@"%p",self]];
+         [[BaalNotifyChannelManager shared] unregisterMessage:params[@"name"] andPointAddress:[NSString stringWithFormat:@"%p",self]];
     };
     Baal_moduleMethodBlock postMessage = ^(WKUserContentController *userContentController, WKScriptMessage *message){
         NSDictionary *params = dictionaryToJson(message.body)[@"params"];
-        [[NotifyChannelManager shared] postMessage:params[@"name"] andData:params[@"messageData"]];
+        [[BaalNotifyChannelManager shared] postMessage:params[@"name"] andData:params[@"messageData"]];
     };
-    return @{@"moduleName":@"NotifyChannel",@"moduleMethod":@{@"registerMessage":registerMessage,@"unregisterMessage":unregisterMessage,@"unregisterMessageCallBack":unregisterMessageCallBack,@"postMessage":postMessage}};
+    return @{@"moduleName":@"BaalNotifyChannel",@"moduleMethod":@{@"registerMessage":registerMessage,@"unregisterMessage":unregisterMessage,@"unregisterMessageCallBack":unregisterMessageCallBack,@"postMessage":postMessage}};
         
 }
 
