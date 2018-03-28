@@ -28,6 +28,8 @@
 		391DAFA22060EC08008FF663 /* BaalViewControllerRouteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 391DAFA12060EC08008FF663 /* BaalViewControllerRouteManager.m */; };
 		391DAFAB206105C0008FF663 /* UIViewController+BaalBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 391DAFAA206105C0008FF663 /* UIViewController+BaalBase.m */; };
 		391DAFAD20620809008FF663 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 391DAFAC20620809008FF663 /* index.html */; };
+		392F4616206A778300375DF4 /* BaalRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 392F4615206A778300375DF4 /* BaalRoute.m */; };
+		392F4618206B38CE00375DF4 /* routeConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 392F4617206B38CE00375DF4 /* routeConfig.json */; };
 		393DAF02205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 393DAF01205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.m */; };
 		39519C3E205014E30036A87B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39519C3D205014E30036A87B /* AppDelegate.m */; };
 		39519C46205014E30036A87B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39519C45205014E30036A87B /* Assets.xcassets */; };
@@ -96,6 +98,9 @@
 		391DAFA9206105C0008FF663 /* UIViewController+BaalBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BaalBase.h"; sourceTree = "<group>"; };
 		391DAFAA206105C0008FF663 /* UIViewController+BaalBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BaalBase.m"; sourceTree = "<group>"; };
 		391DAFAC20620809008FF663 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		392F4614206A778300375DF4 /* BaalRoute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaalRoute.h; sourceTree = "<group>"; };
+		392F4615206A778300375DF4 /* BaalRoute.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaalRoute.m; sourceTree = "<group>"; };
+		392F4617206B38CE00375DF4 /* routeConfig.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = routeConfig.json; sourceTree = "<group>"; };
 		393DAF00205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaalWeexOrHtmlHandlerImpl.h; sourceTree = "<group>"; };
 		393DAF01205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaalWeexOrHtmlHandlerImpl.m; sourceTree = "<group>"; };
 		39519C39205014E30036A87B /* BaalDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaalDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +219,9 @@
 			children = (
 				391DAFA02060EC08008FF663 /* BaalViewControllerRouteManager.h */,
 				391DAFA12060EC08008FF663 /* BaalViewControllerRouteManager.m */,
+				392F4614206A778300375DF4 /* BaalRoute.h */,
+				392F4615206A778300375DF4 /* BaalRoute.m */,
+				392F4617206B38CE00375DF4 /* routeConfig.json */,
 			);
 			path = Route;
 			sourceTree = "<group>";
@@ -424,6 +432,7 @@
 				391DAFAD20620809008FF663 /* index.html in Resources */,
 				39519C49205014E30036A87B /* LaunchScreen.storyboard in Resources */,
 				391DAF782060B66B008FF663 /* WeexpluginConfig.xml in Resources */,
+				392F4618206B38CE00375DF4 /* routeConfig.json in Resources */,
 				391DAF60205FE91F008FF663 /* NotifyChannelViewController.xib in Resources */,
 				39519C46205014E30036A87B /* Assets.xcassets in Resources */,
 			);
@@ -559,6 +568,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				392F4616206A778300375DF4 /* BaalRoute.m in Sources */,
 				391DAF7A2060B66B008FF663 /* WeexPluginLoader.m in Sources */,
 				391DAF8F2060B671008FF663 /* WKWebView+BaalJavaScriptAlert.m in Sources */,
 				393DAF02205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.m in Sources */,

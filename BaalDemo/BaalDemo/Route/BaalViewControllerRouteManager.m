@@ -10,6 +10,8 @@
 #import "UIViewController+BaalBase.h"
 #import "BaalWeexViewController.h"
 #import "BaalWeexWebViewController.h"
+#import "BaalRoute.h"
+
 
 @implementation BaalViewControllerRouteManager
 
@@ -22,7 +24,29 @@
     return manager;
 }
 
+- (NSDictionary *)readRouteConfig:(NSString *)path
+{
+    NSString *absolutePath = [[NSBundle mainBundle] pathForResource:path ofType:nil];
+    if (absolutePath) {
+        return [NSDictionary dictionaryWithContentsOfFile:absolutePath];
+    }
+    return @{};
+    
+}
 
+- (void)ba_pushRouteViewController:(NSString *)pageName andParams:(NSDictionary  *)params
+{
+    NSDictionary *routes = [self readRouteConfig:@"routeConfig.json"];
+    NSDictionary *route = [routes objectForKey:pageName];
+    BaalRoute *baalroute = [BaalRoute provinceWithDictionary:route];
+    if ([baalroute.pageSwitch isEqualToString:@"native"]) {
+        [self ba_pushNativeViewController:baalroute.nativeClassName andParams:params];
+    } else if ([baalroute.pageSwitch isEqualToString:@"H5"]) {
+        [self ba_pushWeexH5ViewController:baalroute.weexh5jsUrl params:params];
+    } else if ([baalroute.pageSwitch isEqualToString:@"weex"]) {
+        [self ba_pushWeexViewController:baalroute.weexjsUrl Params:params];
+    }
+}
 
 
 - (void)ba_pushNativeViewController:(NSString * _Nullable)name andParams:(NSDictionary *)params
