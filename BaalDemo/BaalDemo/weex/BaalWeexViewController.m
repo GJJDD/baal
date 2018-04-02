@@ -45,8 +45,11 @@
     return self;
 }
 
-- (void)configureParamsUrlTag:(NSDictionary *)params
+- (void)configureParamsUrlTag:(NSDictionary *)paramsDict
 {
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:paramsDict];
+    [params setObject:[NSString stringWithFormat:@"%d", arc4random()] forKey:@"random"];
+    
     NSString *params_url_string = @"";
     
     for (NSString *key in [params allKeys]) {
@@ -134,6 +137,7 @@
     [self _renderWithURL:_sourceURL];
 }
 
+
 - (void)_renderWithURL:(NSURL *)sourceURL
 {
     if (!sourceURL) {
@@ -141,30 +145,17 @@
     }
     
     [_instance destroyInstance];
+    if([WXPrerenderManager isTaskReady:[self.sourceURL absoluteString]]){
+        _instance = [WXPrerenderManager instanceFromUrl:self.sourceURL.absoluteString];
+    }
+    
     _instance = [[WXSDKInstance alloc] init];
     _instance.frame = CGRectMake(0.0f, 0.0f, self.view.bounds.size.width, self.view.bounds.size.height);
     _instance.pageObject = self;
-    _instance.pageName = [[WXUtility urlByDeletingParameters:sourceURL] absoluteString];
+    _instance.pageName = sourceURL.absoluteString;
     _instance.viewController = self;
-    NSString *newURL = (NSString *)CFBridgingRelease(CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,
-                                                                                                             (CFStringRef)sourceURL.absoluteString,
-                                                                                                             CFSTR(""),
-                                                                                                             kCFStringEncodingUTF8));
-    NSMutableString *baseUrl=[NSMutableString stringWithFormat:@"%@?random=%d",[[newURL componentsSeparatedByString:@"?"] firstObject],arc4random()];
-    NSMutableDictionary *parameters = ba_getURLParameters(newURL);
-    [parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [baseUrl appendFormat:@"&%@=%@",key,(NSString *)CFBridgingRelease(CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,
-                                                                                                                                  (CFStringRef)obj,
-                                                                                                                                  CFSTR(""),
-                                                                                                                                  kCFStringEncodingUTF8))];
-        
-    }];
     
-    
-    [_instance renderWithURL:[NSURL URLWithString:baseUrl] options:@{@"bundleUrl":(NSString *)CFBridgingRelease(CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,
-                                                                                                                                                                        (CFStringRef)sourceURL.absoluteString,
-                                                                                                                                                                        CFSTR(""),
-                                                                                                                                                                        kCFStringEncodingUTF8))} data:nil];
+    [_instance renderWithURL:sourceURL options:@{@"bundleUrl":sourceURL.absoluteString} data:nil];
     
     __weak typeof(self) weakSelf = self;
     _instance.onCreate = ^(UIView *view) {
@@ -180,6 +171,15 @@
     _instance.renderFinish = ^(UIView *view) {
         [weakSelf _updateInstanceState:WeexInstanceAppear];
     };
+    
+    if([WXPrerenderManager isTaskReady:[self.sourceURL absoluteString]]){
+        WX_MONITOR_INSTANCE_PERF_START(WXPTJSDownload, _instance);
+        WX_MONITOR_INSTANCE_PERF_END(WXPTJSDownload, _instance);
+        WX_MONITOR_INSTANCE_PERF_START(WXPTFirstScreenRender, _instance);
+        WX_MONITOR_INSTANCE_PERF_START(WXPTAllRender, _instance);
+        [WXPrerenderManager renderFromCache:[self.sourceURL absoluteString]];
+        return;
+    }
 }
 
 - (void)_updateInstanceState:(WXState)state

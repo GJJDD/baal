@@ -24,24 +24,25 @@
     return manager;
 }
 
-- (NSDictionary *)readRouteConfig:(NSString *)path
+- (NSDictionary *)readRouteConfig:(NSString *)name
 {
-    NSString *absolutePath = [[NSBundle mainBundle] pathForResource:path ofType:nil];
-    if (absolutePath) {
-        return [NSDictionary dictionaryWithContentsOfFile:absolutePath];
-    }
-    return @{};
+    // 获取文件路径
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"json"];
+    // 将文件数据化
+    NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+    // 对数据进行JSON格式化并返回字典形式
+    return [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     
 }
 
 - (void)ba_pushRouteViewController:(NSString *)pageName andParams:(NSDictionary *)params
 {
-    NSDictionary *routes = [self readRouteConfig:@"routeConfig.json"];
+    NSDictionary *routes = [self readRouteConfig:@"routeConfig"];
     NSDictionary *route = [routes objectForKey:pageName];
     BaalRoute *baalroute = [BaalRoute provinceWithDictionary:route];
     if ([baalroute.pageSwitch isEqualToString:@"native"]) {
         [self ba_pushNativeViewController:baalroute.nativeClassName andParams:params andPageName:pageName];
-    } else if ([baalroute.pageSwitch isEqualToString:@"H5"]) {
+    } else if ([baalroute.pageSwitch isEqualToString:@"h5"]) {
         [self ba_pushWeexH5ViewController:baalroute.weexh5jsUrl params:params andPageName:pageName];
     } else if ([baalroute.pageSwitch isEqualToString:@"weex"]) {
         [self ba_pushWeexViewController:baalroute.weexjsUrl Params:params  andPageName:pageName];

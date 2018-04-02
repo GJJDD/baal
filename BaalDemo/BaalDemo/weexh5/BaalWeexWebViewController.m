@@ -439,6 +439,7 @@
     NSMutableArray *modules = [impl ba_registerModules:self.webView andWeexParams:nil andCallback:nil];
 
     [modules addObject:[self ba_web_notifyChannelModule]];
+    [modules addObject:[self ba_web_routeModule]];
     [self ba_web_loadHtmlWithModules:modules andWeexHtmlJs:weexHtmlJs];
 }
 
@@ -491,19 +492,13 @@
         
 }
 
-
-
 - (NSDictionary *)ba_web_routeModule
 {
-    Baal_moduleMethodBlock registerMessage = ^(WKUserContentController *userContentController, WKScriptMessage *message){
+    Baal_moduleMethodBlock pushRouteViewController = ^(WKUserContentController *userContentController, WKScriptMessage *message){
         NSDictionary *dict = dictionaryToJson(message.body);
         NSDictionary *params = dict[@"params"];
         [[BaalViewControllerRouteManager shared] ba_pushRouteViewController:params[@"pageName"] andParams:params[@"params"]];
- 
     };
-
-
-    return @{@"moduleName":@"BaalNotifyChannel",@"moduleMethod":@{@"registerMessage":registerMessage}};
-    
+    return @{@"moduleName":@"BaalRoute",@"moduleMethod":@{@"pushRouteViewController":pushRouteViewController}};
 }
 @end

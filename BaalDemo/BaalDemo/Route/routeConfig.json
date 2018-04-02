@@ -1,9 +1,9 @@
 {
     "home": {
-        "nativeClassName": "",
-        "weexjsUrl": "",
-        "weexh5jsUrl": "",
-        "pageSwitch": "1"
+        "nativeClassName": "NotifyChannelViewController",
+        "weexjsUrl": "http://192.168.103.195:8081/dist/pages/home.js",
+        "weexh5jsUrl": "http://192.168.103.195:8081/dist/pages/home.web.js",
+        "pageSwitch": "native"
     },
     "mine": {
         "nativeClassName": "",

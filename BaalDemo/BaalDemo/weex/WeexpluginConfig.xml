@@ -40,5 +40,9 @@
         <param name="ios-package" value="BaalNotifyChannelModule" />
         <param name="api" value="BaalNotifyChannel" />
     </feature>
-    
+    <feature name="BaalRouteModule">
+        <param name="category" value="module" />
+        <param name="ios-package" value="BaalRouteModule" />
+        <param name="api" value="BaalRoute" />
+    </feature>
 </widget>
