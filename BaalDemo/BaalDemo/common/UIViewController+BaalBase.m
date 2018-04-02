@@ -8,7 +8,7 @@
 
 #import "UIViewController+BaalBase.h"
 #import <objc/runtime.h>
-static void *pageIdKey = &pageIdKey;
+static void *pageNameKey = &pageNameKey;
 static void *paramsKey = &paramsKey;
 @implementation UIViewController (BaalBase)
 
@@ -23,19 +23,19 @@ static void *paramsKey = &paramsKey;
 }
 
 
--(void)setPageId:(NSString *)pageId
+-(void)setPageName:(NSString *)pageName
 {
-    objc_setAssociatedObject(self, & pageIdKey, pageId, OBJC_ASSOCIATION_COPY);
+    objc_setAssociatedObject(self, & pageNameKey, pageName, OBJC_ASSOCIATION_COPY);
 }
 
--(NSString *)pageId
+-(NSString *)pageName
 {
-    return objc_getAssociatedObject(self, &pageIdKey);
+    return objc_getAssociatedObject(self, &pageNameKey);
 }
 - (BOOL)currentPage:(NSString *)name
 {
     UIViewController *vc = [(UINavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController topViewController];
-    if ([vc.pageId isEqualToString:name]) {
+    if ([vc.pageName isEqualToString:name]) {
         return YES;
     }
     return NO;

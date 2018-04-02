@@ -12,6 +12,8 @@
 #import "BaalWeexOrHtmlHandlerProtocol.h"
 #import "BaalWeexOrHtmlHandlerImpl.h"
 #import "BaalNotifyChannelManager.h"
+#import "BaalViewControllerRouteManager.h"
+
 @interface BaalWeexWebViewController ()
 
 @property(nonatomic, strong) WKWebView *webView;
@@ -489,4 +491,19 @@
         
 }
 
+
+
+- (NSDictionary *)ba_web_routeModule
+{
+    Baal_moduleMethodBlock registerMessage = ^(WKUserContentController *userContentController, WKScriptMessage *message){
+        NSDictionary *dict = dictionaryToJson(message.body);
+        NSDictionary *params = dict[@"params"];
+        [[BaalViewControllerRouteManager shared] ba_pushRouteViewController:params[@"pageName"] andParams:params[@"params"]];
+ 
+    };
+
+
+    return @{@"moduleName":@"BaalNotifyChannel",@"moduleMethod":@{@"registerMessage":registerMessage}};
+    
+}
 @end
