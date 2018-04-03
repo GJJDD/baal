@@ -7,7 +7,7 @@
 //
 
 #import "BaalManager.h"
-
+#import "BaalViewControllerRouteManager.h"
 @interface BaalManager (Route)
-
++ (void)pushRouteViewController:(NSString *)pageName andParams:(NSDictionary *)params;
 @end

@@ -7,8 +7,7 @@
 //
 
 #import "NotifyChannelViewController.h"
-#import "BaalNotifyChannelManager.h"
-#import "UIViewController+BaalBase.h"
+#import "Baal.h"
 
 @interface NotifyChannelViewController ()
 
@@ -22,7 +21,7 @@
 }
 - (IBAction)notifyClick:(UIButton *)sender {
     
-    [[BaalNotifyChannelManager shared] postMessage:@"A" andData:@{@"name":@"123"}];
+    [BaalManager postMessage:@"A" andData:@{@"name":@"123"}];
     
 //    NSLog(@"pageName=%@, params=%@", self.pageName, self.params);
 }

@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface BaalManager : NSObject
-
++ (void)registerHandler:(id)handler withProtocol:(Protocol *)protocol;
++ (void)initBaalEnvironment;
 @end

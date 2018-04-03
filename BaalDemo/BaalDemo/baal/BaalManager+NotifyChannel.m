@@ -7,24 +7,24 @@
 //
 
 #import "BaalManager+NotifyChannel.h"
-#import "BaalNotifyChannelManager.h"
+
 @implementation BaalManager (NotifyChannel)
 
 
-- (void)registerMessage:(NSString * _Nonnull)message andMessageChannelCallback:(BaalNotifyChannelCallback _Nonnull)notifyChannelCallback andPagePointAddress:(NSString * _Nonnull)pagepointAddress
++ (void)registerMessage:(NSString * _Nonnull)message andMessageChannelCallback:(BaalNotifyChannelCallback _Nonnull)notifyChannelCallback andPagePointAddress:(NSString * _Nonnull)pagepointAddress
 {
     [[BaalNotifyChannelManager shared] registerMessage:message andMessageChannelCallback:notifyChannelCallback andPointAddress:pagepointAddress];
 }
-- (void)unregisterMessage:(NSString * _Nonnull)message
++ (void)unregisterMessage:(NSString * _Nonnull)message
 {
     [[BaalNotifyChannelManager shared] unregisterMessage:message];
 }
 
-- (void)unregisterMessage:(NSString * _Nonnull)message andPagePointAddress:(NSString * _Nonnull)pagePointAddress
++ (void)unregisterMessage:(NSString * _Nonnull)message andPagePointAddress:(NSString * _Nonnull)pagePointAddress
 {
     [[BaalNotifyChannelManager shared] unregisterMessage:message andPointAddress:pagePointAddress];
 }
-- (void)postMessage:(NSString * _Nonnull)message andData: (id)data
++ (void)postMessage:(NSString * _Nonnull)message andData: (id)data
 {
     [[BaalNotifyChannelManager shared] postMessage:message andData:data];
 }

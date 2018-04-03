@@ -117,6 +117,7 @@
 		393FAB9C207365B5006C1594 /* BaalManager+Route.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BaalManager+Route.m"; sourceTree = "<group>"; };
 		393FAB9E207365FD006C1594 /* BaalManager+NotifyChannel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BaalManager+NotifyChannel.h"; sourceTree = "<group>"; };
 		393FAB9F207365FD006C1594 /* BaalManager+NotifyChannel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BaalManager+NotifyChannel.m"; sourceTree = "<group>"; };
+		393FABA1207369A6006C1594 /* Baal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Baal.h; sourceTree = "<group>"; };
 		39519C39205014E30036A87B /* BaalDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaalDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39519C3C205014E30036A87B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		39519C3D205014E30036A87B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -179,6 +180,7 @@
 				393FAB9C207365B5006C1594 /* BaalManager+Route.m */,
 				393FAB9E207365FD006C1594 /* BaalManager+NotifyChannel.h */,
 				393FAB9F207365FD006C1594 /* BaalManager+NotifyChannel.m */,
+				393FABA1207369A6006C1594 /* Baal.h */,
 			);
 			path = baal;
 			sourceTree = "<group>";
