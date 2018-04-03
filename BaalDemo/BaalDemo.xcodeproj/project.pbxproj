@@ -32,6 +32,7 @@
 		392F4618206B38CE00375DF4 /* routeConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 392F4617206B38CE00375DF4 /* routeConfig.json */; };
 		392F461B206B421600375DF4 /* BaalRouteModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 392F461A206B421600375DF4 /* BaalRouteModule.m */; };
 		393DAF02205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 393DAF01205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.m */; };
+		393FAB27207326E5006C1594 /* BaalRouteHandlerImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 393FAB26207326E5006C1594 /* BaalRouteHandlerImpl.m */; };
 		39519C3E205014E30036A87B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39519C3D205014E30036A87B /* AppDelegate.m */; };
 		39519C46205014E30036A87B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39519C45205014E30036A87B /* Assets.xcassets */; };
 		39519C49205014E30036A87B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39519C47205014E30036A87B /* LaunchScreen.storyboard */; };
@@ -106,6 +107,9 @@
 		392F461A206B421600375DF4 /* BaalRouteModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaalRouteModule.m; sourceTree = "<group>"; };
 		393DAF00205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaalWeexOrHtmlHandlerImpl.h; sourceTree = "<group>"; };
 		393DAF01205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaalWeexOrHtmlHandlerImpl.m; sourceTree = "<group>"; };
+		393FAB24207324B6006C1594 /* BaalRouteHandlerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaalRouteHandlerProtocol.h; sourceTree = "<group>"; };
+		393FAB25207326E5006C1594 /* BaalRouteHandlerImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaalRouteHandlerImpl.h; sourceTree = "<group>"; };
+		393FAB26207326E5006C1594 /* BaalRouteHandlerImpl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaalRouteHandlerImpl.m; sourceTree = "<group>"; };
 		39519C39205014E30036A87B /* BaalDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaalDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39519C3C205014E30036A87B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		39519C3D205014E30036A87B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 				391DAF662060B665008FF663 /* BaalNotifyChannelManager.m */,
 				391DAFA9206105C0008FF663 /* UIViewController+BaalBase.h */,
 				391DAFAA206105C0008FF663 /* UIViewController+BaalBase.m */,
+				393FAB24207324B6006C1594 /* BaalRouteHandlerProtocol.h */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -276,6 +281,8 @@
 				39519C4B205014E30036A87B /* main.m */,
 				393DAF00205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.h */,
 				393DAF01205BC7BF0058CE36 /* BaalWeexOrHtmlHandlerImpl.m */,
+				393FAB25207326E5006C1594 /* BaalRouteHandlerImpl.h */,
+				393FAB26207326E5006C1594 /* BaalRouteHandlerImpl.m */,
 				391DAF5C205FE91F008FF663 /* NotifyChannelViewController.h */,
 				391DAF5D205FE91F008FF663 /* NotifyChannelViewController.m */,
 				391DAF5E205FE91F008FF663 /* NotifyChannelViewController.xib */,
@@ -581,6 +588,7 @@
 				392F461B206B421600375DF4 /* BaalRouteModule.m in Sources */,
 				391DAF8E2060B671008FF663 /* WKWebView+Baal.m in Sources */,
 				391DAF8D2060B671008FF663 /* WeakScriptMessageDelegate.m in Sources */,
+				393FAB27207326E5006C1594 /* BaalRouteHandlerImpl.m in Sources */,
 				391DAF792060B66B008FF663 /* WeexPluginConfigParser.m in Sources */,
 				39519C4C205014E30036A87B /* main.m in Sources */,
 				391DAF7B2060B66B008FF663 /* WeexPluginManager.m in Sources */,

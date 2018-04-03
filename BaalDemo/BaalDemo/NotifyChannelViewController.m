@@ -22,9 +22,9 @@
 }
 - (IBAction)notifyClick:(UIButton *)sender {
     
-//    [[BaalNotifyChannelManager shared] postMessage:@"A" andData:@{@"name":@"123"}];
+    [[BaalNotifyChannelManager shared] postMessage:@"A" andData:@{@"name":@"123"}];
     
-    NSLog(@"pageName=%@, params=%@", self.pageName, self.params);
+//    NSLog(@"pageName=%@, params=%@", self.pageName, self.params);
 }
 
 

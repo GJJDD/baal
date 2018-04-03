@@ -11,8 +11,9 @@
 #import "BaalWeexViewController.h"
 #import "BaalWeexWebViewController.h"
 #import "BaalRoute.h"
-
-
+#import "BaalHandlerFactory.h"
+#import "BaalRouteHandlerProtocol.h"
+#import "BaalRouteHandlerImpl.h"
 @implementation BaalViewControllerRouteManager
 
 + (instancetype)shared {
@@ -24,20 +25,10 @@
     return manager;
 }
 
-- (NSDictionary *)readRouteConfig:(NSString *)name
-{
-    // 获取文件路径
-    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"json"];
-    // 将文件数据化
-    NSData *data = [[NSData alloc] initWithContentsOfFile:path];
-    // 对数据进行JSON格式化并返回字典形式
-    return [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-    
-}
-
 - (void)ba_pushRouteViewController:(NSString *)pageName andParams:(NSDictionary *)params
 {
-    NSDictionary *routes = [self readRouteConfig:@"routeConfig"];
+    BaalRouteHandlerImpl<BaalRouteHandlerProtocol> *impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalRouteHandlerProtocol)];
+    NSDictionary *routes = [impl routeConfig];
     NSDictionary *route = [routes objectForKey:pageName];
     BaalRoute *baalroute = [BaalRoute provinceWithDictionary:route];
     if ([baalroute.pageSwitch isEqualToString:@"native"]) {

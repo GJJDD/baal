@@ -12,6 +12,8 @@
 #import "BaalWeexOrHtmlHandlerImpl.h"
 #import "BaalWeexOrHtmlHandlerProtocol.h"
 #import "WeexSDKManager.h"
+#import "BaalRouteHandlerProtocol.h"
+#import "BaalRouteHandlerImpl.h"
 
 @interface AppDelegate ()
 
@@ -25,6 +27,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [WeexSDKManager weexSDK];
     [BaalHandlerFactory registerHandler:[BaalWeexOrHtmlHandlerImpl new] withProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
+    [BaalHandlerFactory registerHandler:[BaalRouteHandlerImpl new] withProtocol:@protocol(BaalRouteHandlerProtocol)];
+    
     BaalWeexWebViewController *vc = [[BaalWeexWebViewController alloc] init];
     [vc setBa_web_progressTintColor:[UIColor redColor]];
     vc.fullScreen = YES;
