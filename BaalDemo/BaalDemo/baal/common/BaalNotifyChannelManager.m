@@ -43,23 +43,45 @@
     return self;
 }
 
-
-
-
-- (void)registerMessage:(NSString *)message andMessageChannelCallback:(BaalNotifyChannelCallback)messageChannelCallback andPointAddress:(NSString *)pointAddress
+- (void)registerMessage:(NSString *)message andMessageChannelCallback:(BaalNotifyChannelCallback)notifyChannelCallback andPointAddress:(NSString *)pointAddress
 {
     [_notifyQueueLock lock];
     NSMutableArray<BaalNotifyChannel *> *notifyCallbackArray = [self.notifyQueue valueForKey:message];
     if (!notifyCallbackArray) {
         notifyCallbackArray = [NSMutableArray<BaalNotifyChannel *> array];
     }
-    BaalNotifyChannel *notifyChannel = [[BaalNotifyChannel alloc] init];
-    notifyChannel.callback = messageChannelCallback;
-    notifyChannel.pointAddress = pointAddress;
-    [notifyCallbackArray addObject:notifyChannel];
-    [self.notifyQueue setValue:notifyCallbackArray forKey:message];
+    __block Boolean isExist = NO;
+    [notifyCallbackArray enumerateObjectsUsingBlock:^(BaalNotifyChannel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.pointAddress isEqualToString:pointAddress]) {
+            isExist = YES;
+            return;
+        }
+    }];
+    if (!isExist) {
+        BaalNotifyChannel *notifyChannel = [[BaalNotifyChannel alloc] init];
+        notifyChannel.callback = notifyChannelCallback;
+        notifyChannel.pointAddress = pointAddress;
+        [notifyCallbackArray addObject:notifyChannel];
+        [self.notifyQueue setValue:notifyCallbackArray forKey:message];
+    }
     [_notifyQueueLock unlock];
 }
+
+- (void)unregisterPointAddress:(NSString *)pointAddress
+{
+    [_notifyQueueLock lock];
+    [self.notifyQueue enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSMutableArray<BaalNotifyChannel *> * _Nonnull obj, BOOL * _Nonnull stop) {
+        [obj enumerateObjectsUsingBlock:^(BaalNotifyChannel * _Nonnull notifyChannel, NSUInteger idx, BOOL * _Nonnull stop) {
+            if([pointAddress isEqualToString:notifyChannel.pointAddress]) {
+                [obj removeObject:notifyChannel];
+                return;
+            }
+        }];
+    }];
+    [_notifyQueueLock unlock];
+}
+
+
 
 - (void)unregisterMessage:(NSString *)message andPointAddress:(NSString *)pointAddress
 {

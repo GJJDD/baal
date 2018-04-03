@@ -17,16 +17,9 @@
 
 @implementation BaalViewControllerRouteManager
 
-+ (instancetype)shared {
-    static BaalViewControllerRouteManager *manager;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        manager = [[BaalViewControllerRouteManager alloc] init];
-    });
-    return manager;
-}
 
-- (void)ba_pushRouteViewController:(NSString *)pageName andParams:(NSDictionary *)params
+
++ (void)ba_pushRouteViewController:(NSString *)pageName andParams:(NSDictionary *)params
 {
     BaalRouteHandlerImpl<BaalRouteHandlerProtocol> *impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalRouteHandlerProtocol)];
     NSDictionary *routes = [impl routeConfig];
@@ -42,7 +35,7 @@
 }
 
 
-- (void)ba_pushNativeViewController:(NSString * _Nullable)name andParams:(NSDictionary *)params andPageName:(NSString *)pageName
++ (void)ba_pushNativeViewController:(NSString * _Nullable)name andParams:(NSDictionary *)params andPageName:(NSString *)pageName
 {
     Class class = NSClassFromString(name);
     if (class) {
@@ -54,7 +47,7 @@
 }
 
 
-- (void)ba_pushWeexH5ViewController:(NSString *)url params:(NSDictionary *)params andPageName:(NSString *)pageName
++ (void)ba_pushWeexH5ViewController:(NSString *)url params:(NSDictionary *)params andPageName:(NSString *)pageName
 {
     BaalWeexWebViewController *vc = [[BaalWeexWebViewController alloc] init];
     vc.pageName = pageName;
@@ -62,7 +55,7 @@
     [(UINavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController pushViewController:vc animated:YES];
 }
 
-- (void)ba_pushWeexViewController:(NSString *)url Params:(NSDictionary *)params andPageName:(NSString *)pageName
++ (void)ba_pushWeexViewController:(NSString *)url Params:(NSDictionary *)params andPageName:(NSString *)pageName
 {
     BaalWeexViewController *vc = [[BaalWeexViewController alloc] initWithSourceURL:[NSURL URLWithString:url] andParams:params];
     vc.pageName = pageName;

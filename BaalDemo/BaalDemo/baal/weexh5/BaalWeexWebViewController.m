@@ -497,7 +497,7 @@
     Baal_moduleMethodBlock pushRouteViewController = ^(WKUserContentController *userContentController, WKScriptMessage *message){
         NSDictionary *dict = dictionaryToJson(message.body);
         NSDictionary *params = dict[@"params"];
-        [[BaalViewControllerRouteManager shared] ba_pushRouteViewController:params[@"pageName"] andParams:params[@"params"]];
+        [BaalViewControllerRouteManager ba_pushRouteViewController:params[@"pageName"] andParams:params[@"params"]];
     };
     return @{@"moduleName":@"BaalRoute",@"moduleMethod":@{@"pushRouteViewController":pushRouteViewController}};
 }

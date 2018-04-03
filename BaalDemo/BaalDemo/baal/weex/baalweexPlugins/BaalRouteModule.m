@@ -14,6 +14,6 @@ WX_EXPORT_METHOD(@selector(pushRouteViewController:))
 - (void)pushRouteViewController:(nonnull NSString *)params
 {
     NSDictionary *dict = dictionaryToJson(params);
-    [[BaalViewControllerRouteManager shared] ba_pushRouteViewController:dict[@"params"][@"pageName"] andParams:dict[@"params"][@"params"]];
+    [BaalViewControllerRouteManager  ba_pushRouteViewController:dict[@"params"][@"pageName"] andParams:dict[@"params"][@"params"]];
 }
 @end

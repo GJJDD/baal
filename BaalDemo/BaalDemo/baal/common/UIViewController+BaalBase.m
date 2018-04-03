@@ -8,6 +8,8 @@
 
 #import "UIViewController+BaalBase.h"
 #import <objc/runtime.h>
+#import "BaalNotifyChannelManager.h"
+
 static void *pageNameKey = &pageNameKey;
 static void *paramsKey = &paramsKey;
 @implementation UIViewController (BaalBase)
@@ -41,7 +43,10 @@ static void *paramsKey = &paramsKey;
     return NO;
 }
 
-
+- (void)dealloc
+{
+    [[BaalNotifyChannelManager shared] unregisterPointAddress:[NSString stringWithFormat:@"%p",self]];
+}
 
 
 @end

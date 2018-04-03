@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface BaalViewControllerRouteManager : NSObject
-+ (instancetype)shared;
-- (void)ba_pushRouteViewController:(NSString *)pageName andParams:(NSDictionary *)params;
+
++ (void)ba_pushRouteViewController:(NSString *)pageName andParams:(NSDictionary *)params;
 @end
