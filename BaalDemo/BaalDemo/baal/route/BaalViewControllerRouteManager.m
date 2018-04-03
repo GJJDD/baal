@@ -14,6 +14,7 @@
 #import "BaalHandlerFactory.h"
 #import "BaalRouteHandlerProtocol.h"
 #import "BaalRouteHandlerImpl.h"
+
 @implementation BaalViewControllerRouteManager
 
 + (instancetype)shared {

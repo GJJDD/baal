@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WeexSDKManager : NSObject
-+ (void)weexSDK;
+@interface BaalWeexPluginsManager : NSObject
++ (void)setBaalWeexPlugin;
 @end

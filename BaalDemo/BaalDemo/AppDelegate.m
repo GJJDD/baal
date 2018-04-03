@@ -11,10 +11,10 @@
 #import "BaalHandlerFactory.h"
 #import "BaalWeexOrHtmlHandlerImpl.h"
 #import "BaalWeexOrHtmlHandlerProtocol.h"
-#import "WeexSDKManager.h"
+#import "BaalWeexPluginsManager.h"
 #import "BaalRouteHandlerProtocol.h"
 #import "BaalRouteHandlerImpl.h"
-
+#import "WeexPluginManager.h"
 @interface AppDelegate ()
 
 @end
@@ -25,7 +25,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    [WeexSDKManager weexSDK];
+    [self weexSDK];
     [BaalHandlerFactory registerHandler:[BaalWeexOrHtmlHandlerImpl new] withProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
     [BaalHandlerFactory registerHandler:[BaalRouteHandlerImpl new] withProtocol:@protocol(BaalRouteHandlerProtocol)];
     
@@ -51,7 +51,17 @@
     return YES;
 }
 
-
+- (void)weexSDK
+{
+    [WXAppConfiguration setAppGroup:@"dianwoda"];
+    [WXAppConfiguration setAppName:@"baal"];
+    [WXAppConfiguration setExternalUserAgent:@"ExternalUA"];
+    [WXSDKEngine initSDKEnvironment];
+    [WeexPluginManager registerWeexPlugin];
+#ifdef DEBUG
+    [WXLog setLogLevel:WXLogLevelAll];
+#endif
+}
 
 
 
