@@ -9,7 +9,6 @@ Pod::Spec.new do |s|
     s.platform     = :ios, '8.0'
     s.source       = { :git => 'https://github.com/GJJDD/baal.git', :tag => s.version.to_s }
     s.source_files = 'baal/baal/*.{h,m}'
-    s.dependency  = 'WeexSDK'
     s.requires_arc = true
 end
 
