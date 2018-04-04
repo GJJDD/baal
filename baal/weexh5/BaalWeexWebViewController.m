@@ -10,7 +10,7 @@
 #import "BaalWeexWebViewController.h"
 #import "BaalHandlerFactory.h"
 #import "BaalWeexOrHtmlHandlerProtocol.h"
-#import "BaalWeexOrHtmlHandlerImpl.h"
+#import "BaalWeexOrHtmlHandlerDefaultImpl.h"
 #import "BaalNotifyChannelManager.h"
 #import "BaalViewControllerRouteManager.h"
 
@@ -435,7 +435,7 @@
 
 - (void)ba_web_loadHtmlWithModulesAndUrl:(NSString *)weexHtmlJs
 {
-    BaalWeexOrHtmlHandlerImpl<BaalWeexOrHtmlHandlerProtocol> *impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
+    BaalWeexOrHtmlHandlerDefaultImpl<BaalWeexOrHtmlHandlerProtocol> *impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
     NSMutableArray *modules = [impl ba_registerModules:self.webView andWeexParams:nil andCallback:nil];
 
     [modules addObject:[self ba_web_notifyChannelModule]];
