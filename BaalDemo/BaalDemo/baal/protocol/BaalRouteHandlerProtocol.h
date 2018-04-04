@@ -1,5 +1,5 @@
 //
-//  BaalRouteHandlerImpl.h
+//  BaalRouteHandlerProtocol.h
 //  BaalDemo
 //
 //  Created by dianwoda on 2018/4/3.
@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BaalRouteHandlerImpl : NSObject
-
+@protocol BaalRouteHandlerProtocol <NSObject>
+- (NSDictionary *)routeConfig;
 @end

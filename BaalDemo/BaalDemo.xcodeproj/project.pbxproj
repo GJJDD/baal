@@ -11,8 +11,8 @@
 		391DAF5F205FE91F008FF663 /* NotifyChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 391DAF5D205FE91F008FF663 /* NotifyChannelViewController.m */; };
 		391DAF60205FE91F008FF663 /* NotifyChannelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 391DAF5E205FE91F008FF663 /* NotifyChannelViewController.xib */; };
 		393FAB5D2073308A006C1594 /* routeConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 393FAB372073308A006C1594 /* routeConfig.json */; };
-		393FAB8620733597006C1594 /* BaalRouteHandlerImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 393FAB8320733597006C1594 /* BaalRouteHandlerImpl.m */; };
-		393FAB8720733597006C1594 /* BaalWeexOrHtmlHandlerImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 393FAB8520733597006C1594 /* BaalWeexOrHtmlHandlerImpl.m */; };
+		393FAB8620733597006C1594 /* BaalRouteHandlerDefaultImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 393FAB8320733597006C1594 /* BaalRouteHandlerDefaultImpl.m */; };
+		393FAB8720733597006C1594 /* BaalWeexOrHtmlHandlerDefaultImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 393FAB8520733597006C1594 /* BaalWeexOrHtmlHandlerDefaultImpl.m */; };
 		393FAB932073363E006C1594 /* GuideModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 393FAB8B2073363D006C1594 /* GuideModule.m */; };
 		393FAB942073363E006C1594 /* WeexpluginConfig.xml in Resources */ = {isa = PBXBuildFile; fileRef = 393FAB8C2073363D006C1594 /* WeexpluginConfig.xml */; };
 		393FAB952073363E006C1594 /* WeexPluginConfigParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 393FAB8E2073363D006C1594 /* WeexPluginConfigParser.m */; };
@@ -66,10 +66,10 @@
 		391DAF5D205FE91F008FF663 /* NotifyChannelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotifyChannelViewController.m; sourceTree = "<group>"; };
 		391DAF5E205FE91F008FF663 /* NotifyChannelViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotifyChannelViewController.xib; sourceTree = "<group>"; };
 		393FAB372073308A006C1594 /* routeConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = routeConfig.json; sourceTree = "<group>"; };
-		393FAB8220733597006C1594 /* BaalRouteHandlerImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaalRouteHandlerImpl.h; sourceTree = "<group>"; };
-		393FAB8320733597006C1594 /* BaalRouteHandlerImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaalRouteHandlerImpl.m; sourceTree = "<group>"; };
-		393FAB8420733597006C1594 /* BaalWeexOrHtmlHandlerImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaalWeexOrHtmlHandlerImpl.h; sourceTree = "<group>"; };
-		393FAB8520733597006C1594 /* BaalWeexOrHtmlHandlerImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaalWeexOrHtmlHandlerImpl.m; sourceTree = "<group>"; };
+		393FAB8220733597006C1594 /* BaalRouteHandlerDefaultImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaalRouteHandlerDefaultImpl.h; sourceTree = "<group>"; };
+		393FAB8320733597006C1594 /* BaalRouteHandlerDefaultImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaalRouteHandlerDefaultImpl.m; sourceTree = "<group>"; };
+		393FAB8420733597006C1594 /* BaalWeexOrHtmlHandlerDefaultImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaalWeexOrHtmlHandlerDefaultImpl.h; sourceTree = "<group>"; };
+		393FAB8520733597006C1594 /* BaalWeexOrHtmlHandlerDefaultImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaalWeexOrHtmlHandlerDefaultImpl.m; sourceTree = "<group>"; };
 		393FAB8A2073363D006C1594 /* GuideModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideModule.h; sourceTree = "<group>"; };
 		393FAB8B2073363D006C1594 /* GuideModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideModule.m; sourceTree = "<group>"; };
 		393FAB8C2073363D006C1594 /* WeexpluginConfig.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WeexpluginConfig.xml; sourceTree = "<group>"; };
@@ -169,10 +169,10 @@
 		393FAB8120733597006C1594 /* impl */ = {
 			isa = PBXGroup;
 			children = (
-				393FAB8220733597006C1594 /* BaalRouteHandlerImpl.h */,
-				393FAB8320733597006C1594 /* BaalRouteHandlerImpl.m */,
-				393FAB8420733597006C1594 /* BaalWeexOrHtmlHandlerImpl.h */,
-				393FAB8520733597006C1594 /* BaalWeexOrHtmlHandlerImpl.m */,
+				393FAB8220733597006C1594 /* BaalRouteHandlerDefaultImpl.h */,
+				393FAB8320733597006C1594 /* BaalRouteHandlerDefaultImpl.m */,
+				393FAB8420733597006C1594 /* BaalWeexOrHtmlHandlerDefaultImpl.h */,
+				393FAB8520733597006C1594 /* BaalWeexOrHtmlHandlerDefaultImpl.m */,
 			);
 			path = impl;
 			sourceTree = "<group>";
@@ -647,7 +647,7 @@
 				393FAB962073363E006C1594 /* WeexPluginLoader.m in Sources */,
 				393FABDD2074A102006C1594 /* BaalWeexViewController.m in Sources */,
 				39519C4C205014E30036A87B /* main.m in Sources */,
-				393FAB8620733597006C1594 /* BaalRouteHandlerImpl.m in Sources */,
+				393FAB8620733597006C1594 /* BaalRouteHandlerDefaultImpl.m in Sources */,
 				393FABE22074A102006C1594 /* WKWebView+BaalJavaScriptAlert.m in Sources */,
 				39519C3E205014E30036A87B /* AppDelegate.m in Sources */,
 				393FAB932073363E006C1594 /* GuideModule.m in Sources */,
@@ -658,7 +658,7 @@
 				393FABD62074A102006C1594 /* BaalManager+Route.m in Sources */,
 				391DAF5F205FE91F008FF663 /* NotifyChannelViewController.m in Sources */,
 				393FABDA2074A102006C1594 /* BaalNotifyChannelModule.m in Sources */,
-				393FAB8720733597006C1594 /* BaalWeexOrHtmlHandlerImpl.m in Sources */,
+				393FAB8720733597006C1594 /* BaalWeexOrHtmlHandlerDefaultImpl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

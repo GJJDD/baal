@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "BaalWeexOrHtmlHandlerProtocol.h"
-@interface BaalWeexOrHtmlHandlerImpl : NSObject
+@interface BaalWeexOrHtmlHandlerDefaultImpl : NSObject
 
 @end

@@ -8,8 +8,8 @@
 
 #import "AppDelegate.h"
 #import "Baal.h"
-#import "BaalWeexOrHtmlHandlerImpl.h"
-#import "BaalRouteHandlerImpl.h"
+#import "BaalWeexOrHtmlHandlerDefaultImpl.h"
+#import "BaalRouteHandlerDefaultImpl.h"
 #import "WeexPluginManager.h"
 @interface AppDelegate ()
 
@@ -22,8 +22,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self weexSDK];
-    [BaalManager registerHandler:[BaalWeexOrHtmlHandlerImpl new] withProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
-    [BaalManager registerHandler:[BaalRouteHandlerImpl new] withProtocol:@protocol(BaalRouteHandlerProtocol)];
+    [BaalManager registerHandler:[BaalWeexOrHtmlHandlerDefaultImpl new] withProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
+    [BaalManager registerHandler:[BaalRouteHandlerDefaultImpl new] withProtocol:@protocol(BaalRouteHandlerProtocol)];
     [BaalManager initBaalEnvironment];
     
     BaalWeexWebViewController *vc = [[BaalWeexWebViewController alloc] init];

@@ -8,7 +8,7 @@
 
 #import "GuideModule.h"
 #import "BaalHandlerFactory.h"
-#import "BaalWeexOrHtmlHandlerImpl.h"
+#import "BaalWeexOrHtmlHandlerDefaultImpl.h"
 #import "BaalWeexOrHtmlHandlerProtocol.h"
 @implementation GuideModule
 WX_EXPORT_METHOD(@selector(greeting:callback:))
