@@ -10,5 +10,7 @@ Pod::Spec.new do |s|
     s.source       = { :git => 'https://github.com/GJJDD/baal.git', :tag => s.version.to_s }
     s.source_files = 'baal/baal/*.{h,m}'
     s.requires_arc = true
+    s.frameworks = 'WebKit', 'JavaScriptCore', 'objc'                   #所需的framework，多个用逗号隔开
+    s.dependency 'WeexSDK', '~> 0.17.0'   #依赖关系，该项目所依赖的其他库，如果有多个需要填写多个s.dependency
 end
 
