@@ -1,22 +1,20 @@
 PODS:
-  - WeexSDK (0.17.0)
+  - SocketRocket (0.5.1)
+  - WeexSDK (0.15.1):
+    - SocketRocket
 
 DEPENDENCIES:
-  - WeexSDK (from `https://github.com/apache/incubator-weex.git`, tag `0.17.0`)
+  - WeexSDK
 
-EXTERNAL SOURCES:
-  WeexSDK:
-    :git: https://github.com/apache/incubator-weex.git
-    :tag: 0.17.0
-
-CHECKOUT OPTIONS:
-  WeexSDK:
-    :git: https://github.com/apache/incubator-weex.git
-    :tag: 0.17.0
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - SocketRocket
+    - WeexSDK
 
 SPEC CHECKSUMS:
-  WeexSDK: 555479fae778a9ebda85781200d02df2045b85d2
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+  WeexSDK: 5282685df6d7279213a51a3142b915759f6e3413
 
-PODFILE CHECKSUM: 7c277f6e3088cffc7299140c0585e46d370142fe
+PODFILE CHECKSUM: 5eba06ff70f110798ea1d72e757710e02e2ef33f
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0.beta.1
