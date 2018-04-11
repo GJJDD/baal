@@ -6,9 +6,9 @@
 //  Copyright © 2018年 dianwoda. All rights reserved.
 //
 
-#import "BaalRouteHandlerDefaultImpl.h"
+#import "BaalRouteHandlerImpl.h"
 
-@implementation BaalRouteHandlerDefaultImpl
+@implementation BaalRouteHandlerImpl
 
 
 - (NSDictionary *)routeConfig

@@ -8,8 +8,8 @@
 
 #import "AppDelegate.h"
 #import "Baal.h"
-#import "BaalWeexOrHtmlHandlerDefaultImpl.h"
-#import "BaalRouteHandlerDefaultImpl.h"
+#import "BaalWeexOrHtmlHandlerImpl.h"
+#import "BaalRouteHandlerImpl.h"
 #import "WeexPluginManager.h"
 @interface AppDelegate ()
 
@@ -36,8 +36,8 @@
 
 - (void)baalEnvironment
 {
-    [BaalManager registerHandler:[BaalWeexOrHtmlHandlerDefaultImpl new] withProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
-    [BaalManager registerHandler:[BaalRouteHandlerDefaultImpl new] withProtocol:@protocol(BaalRouteHandlerProtocol)];
+    [BaalManager registerHandler:[BaalWeexOrHtmlHandlerImpl new] withProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
+    [BaalManager registerHandler:[BaalRouteHandlerImpl new] withProtocol:@protocol(BaalRouteHandlerProtocol)];
     [BaalManager initBaalEnvironment];
 }
 

@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BaalRouteHandlerDefaultImpl : NSObject
+@interface BaalRouteHandlerImpl : NSObject
 
 @end
