@@ -22,10 +22,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self weexSDK];
-    [BaalManager registerHandler:[BaalWeexOrHtmlHandlerDefaultImpl new] withProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
-    [BaalManager registerHandler:[BaalRouteHandlerDefaultImpl new] withProtocol:@protocol(BaalRouteHandlerProtocol)];
-    [BaalManager initBaalEnvironment];
-    
+
+    [self baalEnvironment];
     BaalWeexWebViewController *vc = [[BaalWeexWebViewController alloc] init];
 //    [vc setBa_web_progressTintColor:[UIColor redColor]];
 //    vc.fullScreen = YES;
@@ -35,6 +33,14 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+- (void)baalEnvironment
+{
+    [BaalManager registerHandler:[BaalWeexOrHtmlHandlerDefaultImpl new] withProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
+    [BaalManager registerHandler:[BaalRouteHandlerDefaultImpl new] withProtocol:@protocol(BaalRouteHandlerProtocol)];
+    [BaalManager initBaalEnvironment];
+}
+
 
 - (void)weexSDK
 {
