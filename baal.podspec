@@ -9,7 +9,6 @@ Pod::Spec.new do |s|
     s.platform     = :ios, '8.0'
     s.source       = { :git => 'https://github.com/GJJDD/baal.git', :tag => s.version.to_s }
     s.source_files = 'baal/baal.h'
-    s.public_header_files = 'baal/baal.h'
     s.subspec 'common' do |ss|
     s.source_files = 'baal/common/*.{h,m}'
     end
