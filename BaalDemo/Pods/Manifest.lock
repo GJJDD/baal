@@ -1,20 +1,21 @@
 PODS:
-  - SocketRocket (0.5.1)
-  - WeexSDK (0.15.1):
-    - SocketRocket
+  - baal (0.0.2):
+    - WeexSDK
+  - WeexSDK (0.18.0)
 
 DEPENDENCIES:
+  - baal
   - WeexSDK
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - SocketRocket
+    - baal
     - WeexSDK
 
 SPEC CHECKSUMS:
-  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
-  WeexSDK: 5282685df6d7279213a51a3142b915759f6e3413
+  baal: 5bf19352cf1758228ce16522f2695e0894909f77
+  WeexSDK: ac56f255ce9a48e93ebc2e003956ab20da33321d
 
-PODFILE CHECKSUM: 5eba06ff70f110798ea1d72e757710e02e2ef33f
+PODFILE CHECKSUM: b69dfc87f958e40a322a2ed3e422d57f2222eeb9
 
-COCOAPODS: 1.5.0.beta.1
+COCOAPODS: 1.5.0

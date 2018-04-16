@@ -1,0 +1,1 @@
+../../../baal/baal/BaalWeexPluginsManager.h

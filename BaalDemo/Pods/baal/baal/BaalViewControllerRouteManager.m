@@ -13,7 +13,7 @@
 #import "BaalRoute.h"
 #import "BaalHandlerFactory.h"
 #import "BaalRouteHandlerProtocol.h"
-#import "BaalRouteHandlerDefaultImpl.h"
+
 
 @implementation BaalViewControllerRouteManager
 
@@ -21,7 +21,7 @@
 
 + (void)ba_pushRouteViewController:(NSString *)pageName andParams:(NSDictionary *)params
 {
-    BaalRouteHandlerDefaultImpl<BaalRouteHandlerProtocol> *impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalRouteHandlerProtocol)];
+    id<BaalRouteHandlerProtocol> impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalRouteHandlerProtocol)];
     NSDictionary *routes = [impl routeConfig];
     NSDictionary *route = [routes objectForKey:pageName];
     BaalRoute *baalroute = [BaalRoute provinceWithDictionary:route];

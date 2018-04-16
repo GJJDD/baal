@@ -7,7 +7,8 @@
 //
 
 #import "BaalHandlerFactory.h"
-#import "BaalWeexOrHtmlHandlerDefaultImpl.h"
+#import "Baal_ConfigurationDefine.h"
+#import "BaalWeexOrHtmlHandlerProtocol.h"
 @interface BaalHandlerFactory ()
 
 @property (nonatomic, strong) NSMutableDictionary *handlers;
@@ -43,7 +44,7 @@
 + (void)weexModuleParams:(NSString *)params callback:(WXModuleKeepAliveCallback)callback
 {
     NSDictionary *dict = dictionaryToJson(params);
-    BaalWeexOrHtmlHandlerDefaultImpl<BaalWeexOrHtmlHandlerProtocol> *impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
+    id<BaalWeexOrHtmlHandlerProtocol> impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
     NSMutableArray *weexModule = [impl ba_registerModules:nil andWeexParams:params andCallback:callback];
     [weexModule enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         

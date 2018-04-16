@@ -1,6 +1,6 @@
 {
   "name": "baal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "summary": "Fast hybrid development frameworks support weex, H5, native.",
   "homepage": "https://github.com/GJJDD/baal",
   "license": {
@@ -15,7 +15,7 @@
   },
   "source": {
     "git": "https://github.com/GJJDD/baal.git",
-    "tag": "0.0.1"
+    "tag": "0.0.2"
   },
   "source_files": "baal/*.{h,m}",
   "requires_arc": true,
@@ -25,7 +25,7 @@
   ],
   "dependencies": {
     "WeexSDK": [
-      "~> 0.17.0"
+
     ]
   }
 }

@@ -27,7 +27,7 @@
     BaalWeexWebViewController *vc = [[BaalWeexWebViewController alloc] init];
 //    [vc setBa_web_progressTintColor:[UIColor redColor]];
 //    vc.fullScreen = YES;
-    [vc ba_web_loadHtmlWithModulesAndUrl:@"http://192.168.101.204:8081/dist/pages/index.web.js" andParams:@{@"name":@"xxxx", @"age":@"年龄"}];
+    [vc ba_web_loadHtmlWithModulesAndUrl:@"http://192.168.103.29:8081/dist/pages/index.web.js" andParams:@{@"name":@"xxxx", @"age":@"年龄"}];
     UINavigationController *rootViewController = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = rootViewController;
     [self.window makeKeyAndVisible];
