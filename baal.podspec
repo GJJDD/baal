@@ -33,6 +33,7 @@ Pod::Spec.new do |s|
     end
     s.requires_arc = true
     s.frameworks = 'WebKit', 'JavaScriptCore'
-    s.dependency 'WeexSDK', '~> 0.17.0'   #依赖关系，该项目所依赖的其他库，如果有多个需要填写多个s.dependency
+    s.dependency 'WeexSDK'   
+    #依赖关系，该项目所依赖的其他库，如果有多个需要填写多个s.dependency
 end
 
