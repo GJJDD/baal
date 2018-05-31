@@ -1,21 +1,16 @@
 PODS:
-  - baal (0.0.2):
-    - WeexSDK
   - WeexSDK (0.18.0)
 
 DEPENDENCIES:
-  - baal
   - WeexSDK
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - baal
     - WeexSDK
 
 SPEC CHECKSUMS:
-  baal: 5bf19352cf1758228ce16522f2695e0894909f77
   WeexSDK: ac56f255ce9a48e93ebc2e003956ab20da33321d
 
-PODFILE CHECKSUM: b69dfc87f958e40a322a2ed3e422d57f2222eeb9
+PODFILE CHECKSUM: c700f35fd6019f8f82f9c37ce648c5b44991086c
 
 COCOAPODS: 1.5.0

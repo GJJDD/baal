@@ -1,1 +1,0 @@
-../../../baal/baal/WeakScriptMessageDelegate.h

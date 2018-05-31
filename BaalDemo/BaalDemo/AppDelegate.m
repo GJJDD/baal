@@ -27,7 +27,10 @@
     BaalWeexWebViewController *vc = [[BaalWeexWebViewController alloc] init];
 //    [vc setBa_web_progressTintColor:[UIColor redColor]];
 //    vc.fullScreen = YES;
-    [vc ba_web_loadHtmlWithModulesAndUrl:@"http://192.168.103.29:8081/dist/pages/index.web.js" andParams:@{@"name":@"xxxx", @"age":@"年龄"}];
+    [vc ba_web_loadHtmlWithModulesAndUrl:@"https://testdwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/qa/5.1.3/web/views/setting/ModifyAccountView.html" andParams:@{@"name":@"xxxx", @"age":@"年龄"}];
+//    NSString *html = [[NSBundle mainBundle] pathForResource:@"dome" ofType:@"html"];
+//    NSString *js = [NSString stringWithContentsOfFile:html encoding:NSUTF8StringEncoding error:nil];
+//    [vc ba_web_loadHTMLString:js];
     UINavigationController *rootViewController = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = rootViewController;
     [self.window makeKeyAndVisible];
