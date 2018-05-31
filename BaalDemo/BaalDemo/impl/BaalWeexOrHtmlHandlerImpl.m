@@ -20,13 +20,13 @@
         NSDictionary *params = dict[@"params"];
         if (message) {
             /* 核心业务逻辑 */
-            NSDictionary *returnData = @{@"name":@"zh"};
+            NSDictionary *returnData = @{@"name":params[@"params"][@"aa"]};
             [webView ba_web_stringByEvaluateJavaScript:ba_web_callJs(dict[@"callbackJsMethod"], returnData) completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
                 
             }];
         } else {
             /* 核心业务逻辑 */
-            NSDictionary *returnData = @{@"name":@"zh"};
+            NSDictionary *returnData = @{@"name":params[@"params"][@"aa"]};
             callback(returnData,false);
         }
     };
