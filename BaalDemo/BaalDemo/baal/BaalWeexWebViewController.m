@@ -10,7 +10,7 @@
 #import "BaalWeexWebViewController.h"
 #import "BaalHandlerFactory.h"
 #import "BaalWeexOrHtmlHandlerProtocol.h"
-#import "BaalWeexOrHtmlHandlerDefaultImpl.h"
+
 #import "BaalNotifyChannelManager.h"
 #import "BaalViewControllerRouteManager.h"
 
@@ -395,14 +395,14 @@
     };
 }
 
-// 封装weex-h5 module
+
 - (NSString *)weexHtmlHybridModules:(NSArray *)modules andWeexHtmlJs:(NSString *)url
 {
     NSString *bundleUrl = [NSString stringWithFormat:@"\n    weex.config.bundleUrl = '%@'\n", url];
     NSString *pageHtml = [NSString stringWithContentsOfURL:[NSURL URLWithString:url] encoding:NSUTF8StringEncoding error:nil];
     
     
-
+    
     
     NSString *nativeHybrid = [NSString stringWithFormat:@"        <script>\n            var nativeHybrid = {}\n            if (weex.config.env.platform === 'Web') {\n                window.NativeHybrid = nativeHybrid\n                if (window.Vue) {\n                    window.Vue.use(nativeHybrid)\n                }\n            }\n%@        </script>\n        \n    \n",bundleUrl];
     NSMutableString *weexhtmlModule = [NSMutableString string];
@@ -418,16 +418,42 @@
     }];
     
     NSString *weexhtml = [pageHtml stringByReplacingOccurrencesOfString:@"</head>" withString:[NSString stringWithFormat:@"\n%@\n%@\n</head>",weexhtmlModule,nativeHybrid]];
-//    NSString *weexhtml = [NSString stringWithFormat:@"\n%@\n%@\n%@\n",weexhtmlModule,nativeHybrid, pageHtml];
+    //    NSString *weexhtml = [NSString stringWithFormat:@"\n%@\n%@\n%@\n",weexhtmlModule,nativeHybrid, pageHtml];
     
     /*
-    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    // app名称
-    NSString *app_Name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
-    NSString *weexhtml = [NSString stringWithFormat:@"<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset=\"utf-8\">\n            <title>%@</title>\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n                <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n                    <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\">\n                        <meta name=\"apple-touch-fullscreen\" content=\"yes\">\n                            <meta name=\"format-detection\" content=\"telephone=no, email=no\">\n                                <style>body::before { content: \"1\"; height: 0px; overflow: hidden; color: transparent; display: block; }body{margin:0;padding:0}</style>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/vue/vue.min.js\"></script>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/weex-vue-render/index.min.js\"></script>\n    </head>    <body>\n        <div id=\"root\"></div>\n        %@%@\n        <script src=\"%@\"></script>\n    </body>\n</html>\n",app_Name?app_Name:@"baal",weexhtmlModule,nativeHybrid,url];
+     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+     // app名称
+     NSString *app_Name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
+     NSString *weexhtml = [NSString stringWithFormat:@"<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset=\"utf-8\">\n            <title>%@</title>\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n                <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n                    <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\">\n                        <meta name=\"apple-touch-fullscreen\" content=\"yes\">\n                            <meta name=\"format-detection\" content=\"telephone=no, email=no\">\n                                <style>body::before { content: \"1\"; height: 0px; overflow: hidden; color: transparent; display: block; }body{margin:0;padding:0}</style>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/vue/vue.min.js\"></script>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/weex-vue-render/index.min.js\"></script>\n    </head>    <body>\n        <div id=\"root\"></div>\n        %@%@\n        <script src=\"%@\"></script>\n    </body>\n</html>\n",app_Name?app_Name:@"baal",weexhtmlModule,nativeHybrid,url];
      */
     return weexhtml;
 }
+
+
+// 封装weex-h5 module
+//- (NSString *)weexHtmlHybridModules:(NSArray *)modules andWeexHtmlJs:(NSString *)url
+//{
+//
+//    NSString *bundleUrl = [NSString stringWithFormat:@"\n    weex.config.bundleUrl = '%@'\n", url];
+//
+//    NSString *nativeHybrid = [NSString stringWithFormat:@"        <script>\n            var nativeHybrid = {}\n            if (weex.config.env.platform === 'Web') {\n                window.NativeHybrid = nativeHybrid\n                if (window.Vue) {\n                    window.Vue.use(nativeHybrid)\n                }\n            }\n%@        </script>\n        \n    \n",bundleUrl];
+//    NSMutableString *weexhtmlModule = [NSMutableString string];
+//    [modules enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        NSMutableString *weexhtmlMethod = [NSMutableString string];
+//        for (int i = 0;i<[obj[@"moduleMethod"] count];i++) {
+//
+//            [weexhtmlMethod appendFormat:@"\n                                        %@ (params, callback) {\n                                          webkit.messageHandlers.%@.postMessage(params,callback);\n                                            nativeHybrid.%@ = function(data) {\n                                                callback(data);\n                                             }\n                                       },\n",obj[@"moduleMethod"][i],obj[@"moduleMethod"][i],obj[@"moduleMethod"][i]];
+//        }
+//        [weexhtmlModule appendFormat:@"\n<script>\n            %@ = {\n                init: function (weex) {\n                    weex.registerModule('%@', {%@                                        })\n                }\n            }\n        weex.install(%@);\n        </script>\n",obj[@"moduleName"],obj[@"moduleName"],weexhtmlMethod,obj[@"moduleName"]];
+//        weexhtmlMethod = nil;
+//
+//    }];
+//    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+//    // app名称
+//    NSString *app_Name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
+//    NSString *weexhtml = [NSString stringWithFormat:@"<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset=\"utf-8\">\n            <title>%@</title>\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n                <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n                    <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\">\n                        <meta name=\"apple-touch-fullscreen\" content=\"yes\">\n                            <meta name=\"format-detection\" content=\"telephone=no, email=no\">\n                                <style>body::before { content: \"1\"; height: 0px; overflow: hidden; color: transparent; display: block; }body{margin:0;padding:0}</style>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/vue/vue.min.js\"></script>\n                                <script src=\"http://prodwbbucket.oss-cn-hangzhou.aliyuncs.com/weex/rider/node_modules/weex-vue-render/index.min.js\"></script>\n    </head>    <body>\n        <div id=\"root\"></div>\n        %@%@\n        <script src=\"%@\"></script>\n    </body>\n</html>\n",app_Name?app_Name:@"baal",weexhtmlModule,nativeHybrid,url];
+//    return weexhtml;
+//}
 
 - (void)ba_web_loadHtmlWithModules:(NSArray *)modules andWeexHtmlJs:(NSString *)url
 {
@@ -444,7 +470,7 @@
 
 - (void)ba_web_loadHtmlWithModulesAndUrl:(NSString *)weexHtmlJs
 {
-    BaalWeexOrHtmlHandlerDefaultImpl<BaalWeexOrHtmlHandlerProtocol> *impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
+    id<BaalWeexOrHtmlHandlerProtocol> impl = [BaalHandlerFactory handlerForProtocol:@protocol(BaalWeexOrHtmlHandlerProtocol)];
     NSMutableArray *modules = [impl ba_registerModules:self.webView andWeexParams:nil andCallback:nil];
 
     [modules addObject:[self ba_web_notifyChannelModule]];

@@ -9,7 +9,6 @@
 #import "BaalManager.h"
 #import "BaalHandlerFactory.h"
 #import "BaalWeexPluginsManager.h"
-
 @implementation BaalManager
 
 + (void)registerHandler:(id)handler withProtocol:(Protocol *)protocol

@@ -145,9 +145,9 @@
     }
     
     [_instance destroyInstance];
-    if([WXPrerenderManager isTaskReady:[self.sourceURL absoluteString]]){
-        _instance = [WXPrerenderManager instanceFromUrl:self.sourceURL.absoluteString];
-    }
+//    if([WXPrerenderManager isTaskReady:[self.sourceURL absoluteString]]){
+//        _instance = [WXPrerenderManager instanceFromUrl:self.sourceURL.absoluteString];
+//    }
     
     _instance = [[WXSDKInstance alloc] init];
     _instance.frame = CGRectMake(0.0f, 0.0f, self.view.bounds.size.width, self.view.bounds.size.height);
@@ -172,14 +172,14 @@
         [weakSelf _updateInstanceState:WeexInstanceAppear];
     };
     
-    if([WXPrerenderManager isTaskReady:[self.sourceURL absoluteString]]){
-        WX_MONITOR_INSTANCE_PERF_START(WXPTJSDownload, _instance);
-        WX_MONITOR_INSTANCE_PERF_END(WXPTJSDownload, _instance);
-        WX_MONITOR_INSTANCE_PERF_START(WXPTFirstScreenRender, _instance);
-        WX_MONITOR_INSTANCE_PERF_START(WXPTAllRender, _instance);
-        [WXPrerenderManager renderFromCache:[self.sourceURL absoluteString]];
-        return;
-    }
+//    if([WXPrerenderManager isTaskReady:[self.sourceURL absoluteString]]){
+//        WX_MONITOR_INSTANCE_PERF_START(WXPTJSDownload, _instance);
+//        WX_MONITOR_INSTANCE_PERF_END(WXPTJSDownload, _instance);
+//        WX_MONITOR_INSTANCE_PERF_START(WXPTFirstScreenRender, _instance);
+//        WX_MONITOR_INSTANCE_PERF_START(WXPTAllRender, _instance);
+//        [WXPrerenderManager renderFromCache:[self.sourceURL absoluteString]];
+//        return;
+//    }
 }
 
 - (void)_updateInstanceState:(WXState)state
