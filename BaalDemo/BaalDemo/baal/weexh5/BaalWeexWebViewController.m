@@ -401,7 +401,7 @@
     NSString *bundleUrl = [NSString stringWithFormat:@"\n    weex.config.bundleUrl = '%@'\n", url];
     NSString *pageHtml = [NSString stringWithContentsOfURL:[NSURL URLWithString:url] encoding:NSUTF8StringEncoding error:nil];
     
-    
+
     
     
     NSString *nativeHybrid = [NSString stringWithFormat:@"        <script>\n            var nativeHybrid = {}\n            if (weex.config.env.platform === 'Web') {\n                window.NativeHybrid = nativeHybrid\n                if (window.Vue) {\n                    window.Vue.use(nativeHybrid)\n                }\n            }\n%@        </script>\n        \n    \n",bundleUrl];
@@ -410,7 +410,9 @@
         NSMutableString *weexhtmlMethod = [NSMutableString string];
         for (int i = 0;i<[obj[@"moduleMethod"] count];i++) {
             
-            [weexhtmlMethod appendFormat:@"\n                                        %@ (params, callback) {\n                                          webkit.messageHandlers.%@.postMessage(params,callback);\n                                            nativeHybrid.%@ = function(data) {\n                                                callback(data);\n                                             }\n                                       },\n",obj[@"moduleMethod"][i],obj[@"moduleMethod"][i],obj[@"moduleMethod"][i]];
+            NSString *weexRequestParams = [NSString stringWithFormat:@"\n            let weexRequest = {\n                moduleName:'%@',\n                methodName:'%@',\n                callbackJsMethod:'window.NativeHybrid.%@',\n                params:params,\n            }\n",obj[@"moduleName"],obj[@"moduleMethod"][i],obj[@"moduleMethod"][i]];
+            
+            [weexhtmlMethod appendFormat:@"\n                                        %@ (params, callback) {\n %@                                          webkit.messageHandlers.%@.postMessage(JSON.stringify(weexRequest));\n                                            nativeHybrid.%@ = function(data) {\n                                                callback(data);\n                                             }\n                                       },\n",obj[@"moduleMethod"][i],weexRequestParams,obj[@"moduleMethod"][i],obj[@"moduleMethod"][i]];
         }
         [weexhtmlModule appendFormat:@"\n<script>\n            %@ = {\n                init: function (weex) {\n                    weex.registerModule('%@', {%@                                        })\n                }\n            }\n        weex.install(%@);\n        </script>\n",obj[@"moduleName"],obj[@"moduleName"],weexhtmlMethod,obj[@"moduleName"]];
         weexhtmlMethod = nil;
