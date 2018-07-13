@@ -28,7 +28,7 @@
     if ([baalroute.pageSwitch isEqualToString:@"native"]) {
         [self ba_pushNativeViewController:baalroute.nativeClassName andParams:params andPageName:pageName];
     } else if ([baalroute.pageSwitch isEqualToString:@"h5"]) {
-        [self ba_pushWeexH5ViewController:baalroute.weexh5jsUrl params:params andPageName:pageName];
+        [self ba_pushWeexH5ViewController:baalroute.weexHtmlUrl params:params andPageName:pageName];
     } else if ([baalroute.pageSwitch isEqualToString:@"weex"]) {
         [self ba_pushWeexViewController:baalroute.weexjsUrl Params:params  andPageName:pageName];
     }

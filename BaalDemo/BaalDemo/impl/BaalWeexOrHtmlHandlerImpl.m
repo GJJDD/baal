@@ -30,6 +30,7 @@
             callback(returnData,false);
         }
     };
+    
     Baal_moduleMethodBlock block1 = ^(WKUserContentController *userContentController, WKScriptMessage *message){
         NSDictionary *dict = dictionaryToJson(message?message.body:weexParamsJson);
         NSDictionary *params = dict[@"params"];
